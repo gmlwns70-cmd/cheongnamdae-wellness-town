@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://example.github.io/cheongnamdae-wellness-town/sitemap.xml
