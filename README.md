@@ -36,11 +36,15 @@ cheongnamdae-wellness-town/
 links: {
   booking: "",    // 예약 페이지
   googleForm: "", // 문의 폼
+  smartPlace: "https://smartplace.naver.com/bizs/place/11929494",
+  smartPlaceBooking: "https://smartplace.naver.com/bizs/place/11929494",
+  smartStore: "https://smartstore.naver.com/kfood_wild_ginseng",
   kakao: "",      // 카카오톡 채널
   naverMap: "주소 검색 링크",
   kakaoMap: "주소 검색 링크",
-  instagram: "",  // 인스타그램
-  youtube: "",    // 유튜브
+  instagram: "https://instagram.com/forest_sauna_munui",
+  youtube: "https://youtube.com/@dongwoosansam",
+  naverBlog: "https://blog.naver.com/gmlwns70",
   phone: "010-4924-3435",
   sms: "010-4924-3435",
   email: "gmlwns70@gmail.com"
@@ -99,7 +103,7 @@ links: {
 
 ## 배포 전 확인
 
-- `config.js`에 지도/SNS 링크 입력
+- `config.js`에 스마트플레이스, 지도, SNS, 블로그 링크 입력
 - `index.html`의 임시 문구 확인
 - `sitemap.xml`, `robots.txt`, `canonical`, `og:url`을 실제 주소로 변경
 - `privacy.html`의 개인정보 보관 기간 검토

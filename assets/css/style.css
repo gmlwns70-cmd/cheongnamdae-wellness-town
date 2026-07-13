@@ -563,6 +563,49 @@ button {
   background: rgba(255, 255, 255, 0.62);
 }
 
+.channel-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  margin-top: 42px;
+  border: 1px solid var(--line);
+  background: var(--line);
+}
+
+.channel-link {
+  min-height: 190px;
+  padding: 24px;
+  background: var(--paper);
+  transition: background 180ms ease, transform 180ms ease;
+}
+
+.channel-link:hover {
+  background: var(--white);
+  transform: translateY(-4px);
+}
+
+.channel-link span {
+  color: var(--wood);
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.channel-link strong {
+  display: block;
+  margin-top: 38px;
+  color: var(--forest);
+  font-size: 22px;
+  line-height: 1.2;
+}
+
+.channel-link small {
+  display: block;
+  margin-top: 10px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.5;
+}
+
 .footer {
   padding: 48px 0;
   background: var(--forest-deep);
@@ -673,7 +716,8 @@ button {
   .flow,
   .info-grid,
   .gallery-grid,
-  .price-layout {
+  .price-layout,
+  .channel-grid {
     grid-template-columns: 1fr 1fr;
   }
 
@@ -723,7 +767,8 @@ button {
   .flow,
   .info-grid,
   .gallery-grid,
-  .price-layout {
+  .price-layout,
+  .channel-grid {
     grid-template-columns: 1fr;
   }
 

@@ -37,11 +37,15 @@ const initConfigBindings = () => {
   setText("[data-business-number]", config.business?.businessNumber || "추후 입력 필요");
   setText("[data-email-text]", links.email || "추후 입력 필요");
 
-  applyLink("[data-link='booking']", links.booking || links.googleForm, "예약 링크 준비 중");
+  applyLink("[data-link='booking']", links.booking || links.googleForm || links.smartPlaceBooking, "예약 링크 준비 중");
+  applyLink("[data-link='smartPlace']", links.smartPlace, "스마트플레이스 준비 중");
+  applyLink("[data-link='smartPlaceBooking']", links.smartPlaceBooking || links.booking || links.googleForm, "예약 링크 준비 중");
+  applyLink("[data-link='smartStore']", links.smartStore, "스마트스토어 준비 중");
   applyLink("[data-link='kakao']", links.kakao, "카카오톡 준비 중");
   applyLink("[data-link='naverMap']", links.naverMap || links.kakaoMap, "지도 링크 준비 중");
   applyLink("[data-link='instagram']", links.instagram, "Instagram 준비 중");
   applyLink("[data-link='youtube']", links.youtube, "YouTube 준비 중");
+  applyLink("[data-link='naverBlog']", links.naverBlog, "네이버블로그 준비 중");
 
   const phoneHref = links.phone ? `tel:${normalizePhone(links.phone)}` : "";
   const smsHref = links.sms ? `sms:${normalizePhone(links.sms)}` : "";
