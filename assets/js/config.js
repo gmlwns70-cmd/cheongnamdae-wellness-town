@@ -7,10 +7,10 @@ window.SITE_CONFIG = {
   tagline: "편백 배럴 찜질 체험",
 
   links: {
-    booking: "", // 추후 입력 필요: 외부 예약 페이지 URL
-    googleForm: "", // 추후 입력 필요: 문의/예약 Google Form URL
+    booking: "https://forms.gle/XAQvZZRyChFnyE5C9",
+    googleForm: "https://forms.gle/XAQvZZRyChFnyE5C9",
     smartPlace: "https://map.naver.com/p/search/%EC%B2%AD%EB%82%A8%EB%8C%80%20%EC%9B%B0%EB%8B%88%EC%8A%A4%ED%83%80%EC%9A%B4",
-    smartPlaceBooking: "https://map.naver.com/p/search/%EC%B2%AD%EB%82%A8%EB%8C%80%20%EC%9B%B0%EB%8B%88%EC%8A%A4%ED%83%80%EC%9A%B4",
+    smartPlaceBooking: "https://forms.gle/XAQvZZRyChFnyE5C9",
     smartStore: "https://smartstore.naver.com/kfood_wild_ginseng",
     kakao: "", // 추후 입력 필요: 카카오톡 채널 URL
     naverMap: "https://map.naver.com/p/search/%EC%B6%A9%EC%B2%AD%EB%B6%81%EB%8F%84%20%EC%B2%AD%EC%A3%BC%EC%8B%9C%20%EC%83%81%EB%8B%B9%EA%B5%AC%20%EB%AC%B8%EC%9D%98%EB%A9%B4%20%EB%AF%B8%EC%B2%9C%EB%A6%AC%20638-1", // 주소 검색 링크입니다. 실제 장소 링크가 생기면 교체하세요.

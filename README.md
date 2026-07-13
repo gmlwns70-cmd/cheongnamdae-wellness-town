@@ -46,10 +46,10 @@ cheongnamdae-wellness-town/
 
 ```js
 links: {
-  booking: "",    // 예약 페이지
-  googleForm: "", // 문의 폼
+  booking: "https://forms.gle/XAQvZZRyChFnyE5C9",
+  googleForm: "https://forms.gle/XAQvZZRyChFnyE5C9",
   smartPlace: "https://map.naver.com/p/search/청남대%20웰니스타운",
-  smartPlaceBooking: "https://map.naver.com/p/search/청남대%20웰니스타운",
+  smartPlaceBooking: "https://forms.gle/XAQvZZRyChFnyE5C9",
   smartStore: "https://smartstore.naver.com/kfood_wild_ginseng",
   kakao: "",      // 카카오톡 채널
   naverMap: "주소 검색 링크",
@@ -131,4 +131,3 @@ links: {
 ## 선택으로 추가할 자료
 
 - 카카오톡 채널
-- 예약 링크 또는 문의 폼
