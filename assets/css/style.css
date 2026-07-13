@@ -155,7 +155,7 @@ button {
   overflow: hidden;
   background:
     linear-gradient(90deg, rgba(15, 41, 29, 0.88), rgba(15, 41, 29, 0.62) 42%, rgba(15, 41, 29, 0.16)),
-    url("../images/hero-wellness.jpg") center / cover no-repeat;
+    url("../images/hero-wellness.jpg?v=20260713-3") center / cover no-repeat;
 }
 
 .hero::after {
@@ -696,7 +696,7 @@ button {
     min-height: auto;
     background:
       linear-gradient(180deg, rgba(15, 41, 29, 0.88), rgba(15, 41, 29, 0.58)),
-      url("../images/hero-wellness.jpg") center / cover no-repeat;
+      url("../images/hero-wellness.jpg?v=20260713-3") center / cover no-repeat;
   }
 
   .hero-inner {
