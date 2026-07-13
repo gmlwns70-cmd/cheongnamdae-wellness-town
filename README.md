@@ -36,9 +36,9 @@ cheongnamdae-wellness-town/
 links: {
   booking: "",    // 예약 페이지
   googleForm: "", // 문의 폼
-  smartPlace: "https://smartplace.naver.com/bizs/place/11929494",
-  smartPlaceBooking: "https://smartplace.naver.com/bizs/place/11929494",
-  smartStore: "https://smartstore.naver.com/kfood_wild_ginseng",
+  smartPlace: "https://m.place.naver.com/place/11929494/home",
+  smartPlaceBooking: "https://m.place.naver.com/place/11929494/home",
+  smartStore: "https://m.smartstore.naver.com/kfood_wild_ginseng",
   kakao: "",      // 카카오톡 채널
   naverMap: "주소 검색 링크",
   kakaoMap: "주소 검색 링크",
