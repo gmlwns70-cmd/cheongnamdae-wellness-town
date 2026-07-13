@@ -15,10 +15,19 @@ const applyLink = (selector, value, fallbackText) => {
       node.href = value;
       node.classList.remove("is-disabled");
       node.removeAttribute("aria-disabled");
+      if (/^https?:\/\//.test(value)) {
+        node.target = "_blank";
+        node.rel = "noopener noreferrer";
+      } else {
+        node.removeAttribute("target");
+        node.removeAttribute("rel");
+      }
     } else {
       node.href = "#pending-info";
       node.classList.add("is-disabled");
       node.setAttribute("aria-disabled", "true");
+      node.removeAttribute("target");
+      node.removeAttribute("rel");
       if (fallbackText) node.textContent = fallbackText;
     }
   });
