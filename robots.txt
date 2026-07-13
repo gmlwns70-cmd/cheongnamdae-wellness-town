@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://example.github.io/cheongnamdae-wellness-town/sitemap.xml
+Sitemap: https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/sitemap.xml
