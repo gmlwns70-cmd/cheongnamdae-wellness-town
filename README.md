@@ -34,7 +34,10 @@ cheongnamdae-wellness-town/
         ├── exterior-front.webp
         ├── exterior-forest.webp
         ├── exterior-yard.webp
-        └── sunset-road.webp
+        ├── sunset-road.webp
+        ├── gallery-new-view.webp
+        ├── gallery-new-sign.webp
+        └── gallery-new-promo.webp
 ```
 
 ## 가장 먼저 수정할 곳
@@ -82,7 +85,7 @@ links: {
 - 첫 화면 배경: `hero-wellness.jpg`
 - 로고: `logo.webp`
 - 소개 이미지: `barrel-interior.webp`
-- 현장 사진: `barrel-lounge.webp`, `heater-room.webp`, `view-flowers.webp`, `forest-experience.webp`, `forest-guide.webp`, `entrance-banner.webp`, `price-sign.webp`, `mountain-view.webp`, `sunset-view.webp`, `forest-walk.webp`, `exterior-front.webp`, `exterior-forest.webp`, `exterior-yard.webp`, `sunset-road.webp`
+- 현장 사진: `barrel-lounge.webp`, `heater-room.webp`, `view-flowers.webp`, `forest-experience.webp`, `forest-guide.webp`, `entrance-banner.webp`, `price-sign.webp`, `mountain-view.webp`, `sunset-view.webp`, `forest-walk.webp`, `exterior-front.webp`, `exterior-forest.webp`, `exterior-yard.webp`, `sunset-road.webp`, `gallery-new-view.webp`, `gallery-new-sign.webp`, `gallery-new-promo.webp`
 - 파비콘: `favicon.png`
 
 같은 파일명으로 덮어쓰면 HTML을 고치지 않아도 됩니다.
