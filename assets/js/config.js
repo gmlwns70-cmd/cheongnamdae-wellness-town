@@ -17,7 +17,7 @@ window.SITE_CONFIG = {
     kakaoMap: "https://map.kakao.com/link/search/%EC%B6%A9%EC%B2%AD%EB%B6%81%EB%8F%84%20%EC%B2%AD%EC%A3%BC%EC%8B%9C%20%EC%83%81%EB%8B%B9%EA%B5%AC%20%EB%AC%B8%EC%9D%98%EB%A9%B4%20%EB%AF%B8%EC%B2%9C%EB%A6%AC%20638-1", // 주소 검색 링크입니다. 실제 장소 링크가 생기면 교체하세요.
     instagram: "https://instagram.com/forest_sauna_munui",
     youtube: "https://youtube.com/@dongwoosansam",
-    naverBlog: "https://blog.naver.com/gmlwns70",
+    naverBlog: "https://blog.naver.com/linkfactory70",
     phone: "010-4924-3435",
     sms: "010-4924-3435",
     email: "gmlwns70@gmail.com"

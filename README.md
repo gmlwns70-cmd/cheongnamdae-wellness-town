@@ -56,7 +56,7 @@ links: {
   kakaoMap: "주소 검색 링크",
   instagram: "https://instagram.com/forest_sauna_munui",
   youtube: "https://youtube.com/@dongwoosansam",
-  naverBlog: "https://blog.naver.com/gmlwns70",
+  naverBlog: "https://blog.naver.com/linkfactory70",
   phone: "010-4924-3435",
   sms: "010-4924-3435",
   email: "gmlwns70@gmail.com"
