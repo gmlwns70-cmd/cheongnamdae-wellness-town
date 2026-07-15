@@ -1,445 +1,113 @@
-<!doctype html>
-<html lang="ko">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!-- 수정 위치: 실제 배포 주소가 확정되면 canonical, og:url, sitemap.xml의 URL을 바꾸세요. -->
-    <title>청남대웰니스타운 | 편백 배럴 찜질 체험</title>
-    <meta name="description" content="청남대 웰니스타운은 충청북도 청주시 상당구 문의면에 위치한 편백 배럴 찜질 체험 공간입니다. 운영시간은 매일 09:00~21:00입니다.">
-    <meta name="robots" content="index, follow">
-    <link rel="canonical" href="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/">
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="청남대웰니스타운">
-    <meta property="og:description" content="편백 향과 배럴 찜질 체험을 소개합니다.">
-    <meta property="og:image" content="assets/images/hero-wellness.jpg?v=20260713-4">
-    <meta property="og:url" content="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/">
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="preload" as="image" href="assets/images/hero-wellness.jpg?v=20260713-4">
-    <link rel="stylesheet" href="assets/css/style.css">
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "name": "청남대 웰니스타운",
-        "description": "편백 배럴 찜질 체험 공간",
-        "telephone": "+82-10-4924-3435",
-        "email": "gmlwns70@gmail.com",
-        "identifier": "233-88-01155",
-        "address": {
-          "@type": "PostalAddress",
-          "addressCountry": "KR",
-          "addressRegion": "충청북도",
-          "addressLocality": "청주시 상당구",
-          "streetAddress": "문의면 미천리 638-1"
-        },
-        "openingHours": "Mo-Su 09:00-21:00"
+const config = window.SITE_CONFIG || {};
+const links = config.links || {};
+
+const setText = (selector, text) => {
+  document.querySelectorAll(selector).forEach((node) => {
+    node.textContent = text;
+  });
+};
+
+const normalizePhone = (value) => (value || "").replace(/[^\d+]/g, "");
+
+const applyLink = (selector, value, fallbackText) => {
+  document.querySelectorAll(selector).forEach((node) => {
+    if (value) {
+      node.href = value;
+      node.classList.remove("is-disabled");
+      node.removeAttribute("aria-disabled");
+      if (/^https?:\/\//.test(value)) {
+        node.target = "_blank";
+        node.rel = "noopener noreferrer";
+      } else {
+        node.removeAttribute("target");
+        node.removeAttribute("rel");
       }
-    </script>
-  </head>
-  <body>
-    <a class="skip-link" href="#main">본문으로 바로가기</a>
+    } else {
+      node.href = "#pending-info";
+      node.classList.add("is-disabled");
+      node.setAttribute("aria-disabled", "true");
+      node.removeAttribute("target");
+      node.removeAttribute("rel");
+      if (fallbackText) node.textContent = fallbackText;
+    }
+  });
+};
 
-    <!-- 상단 메뉴: 메뉴명 수정은 이 영역과 README의 메뉴 수정 안내를 참고하세요. -->
-    <header class="site-header">
-      <div class="header-inner">
-        <a class="brand-mark" href="#top" aria-label="청남대웰니스타운 홈">
-          <img src="assets/images/logo.webp" alt="청남대 웰니스타운 로고">
-          <span class="brand-copy">
-            <span data-brand-name>청남대 웰니스타운</span>
-            <small data-tagline>편백 향이 머무는 힐링 공간</small>
-          </span>
-        </a>
-        <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
-          <span></span>
-        </button>
-        <nav class="site-nav" aria-label="주요 메뉴">
-          <a href="#experience">소개</a>
-          <a href="#program">프로그램</a>
-          <a href="#pricing">요금</a>
-          <a href="#gallery">현장 사진</a>
-          <a href="#guide">이용 순서</a>
-          <a href="#channels">공식 채널</a>
-          <a href="#contact">문의</a>
-        </nav>
-      </div>
-    </header>
+const initConfigBindings = () => {
+  setText("[data-brand-name]", config.brandName || "청남대웰니스타운");
+  setText("[data-tagline]", config.tagline || "편백 향이 머무는 힐링 공간");
+  setText("[data-address]", config.business?.address || "추후 입력 필요");
+  setText("[data-hours]", config.business?.hours || "추후 입력 필요");
+  setText("[data-closed-days]", config.business?.closedDays || "추후 입력 필요");
+  setText("[data-parking]", config.business?.parking || "추후 입력 필요");
+  setText("[data-policy]", config.business?.reservationPolicy || "추후 입력 필요");
+  setText("[data-company-name]", config.business?.companyName || config.brandName || "청남대웰니스타운");
+  setText("[data-owner]", config.business?.owner || "추후 입력 필요");
+  setText("[data-business-number]", config.business?.businessNumber || "추후 입력 필요");
+  setText("[data-email-text]", links.email || "추후 입력 필요");
 
-    <main id="main">
-      <!-- HERO 섹션: 수정 위치 - 첫 문장, 소개문, CTA 문구를 운영 전 확정하세요. -->
-      <section class="hero" id="top" aria-label="청남대웰니스타운 소개">
-        <div class="hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow">CHEONGNAMDAE WELLNESS TOWN</p>
-            <h1 data-brand-name>청남대 웰니스타운</h1>
-            <p class="lead">편백 향과 배럴 찜질을 중심으로 쉬어가는 체험 공간입니다.</p>
-            <div class="hero-actions" aria-label="주요 행동">
-              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약폼 작성</a>
-              <a class="button button-secondary" href="tel:01049243435" data-link="phone">전화 문의</a>
-              <a class="button button-secondary" href="https://map.naver.com/p/search/%EC%B6%A9%EC%B2%AD%EB%B6%81%EB%8F%84%20%EC%B2%AD%EC%A3%BC%EC%8B%9C%20%EC%83%81%EB%8B%B9%EA%B5%AC%20%EB%AC%B8%EC%9D%98%EB%A9%B4%20%EB%AF%B8%EC%B2%9C%EB%A6%AC%20638-1" data-link="naverMap">오시는 길</a>
-            </div>
-            <p class="hero-note">매일 09:00~21:00 운영 · 4부제 예약 가능 · 주차 가능</p>
-          </div>
-        </div>
-      </section>
+  applyLink("[data-link='booking']", links.booking || links.googleForm || links.smartPlaceBooking, "예약 링크 준비 중");
+  applyLink("[data-link='smartPlace']", links.smartPlace, "스마트플레이스 준비 중");
+  applyLink("[data-link='smartPlaceBooking']", links.smartPlaceBooking || links.booking || links.googleForm, "예약 링크 준비 중");
+  applyLink("[data-link='smartStore']", links.smartStore, "스마트스토어 준비 중");
+  applyLink("[data-link='kakao']", links.kakao, "카카오톡 준비 중");
+  applyLink("[data-link='naverMap']", links.naverMap || links.kakaoMap, "지도 링크 준비 중");
+  applyLink("[data-link='instagram']", links.instagram, "Instagram 준비 중");
+  applyLink("[data-link='youtube']", links.youtube, "YouTube 준비 중");
+  applyLink("[data-link='naverBlog']", links.naverBlog, "네이버블로그 준비 중");
 
-      <!-- 개업 기념 이벤트 섹션: 첫 화면 바로 아래 노출합니다. -->
-      <section class="event-promo" id="opening-event" aria-label="개업 기념 이벤트">
-        <div class="event-promo-inner" data-reveal>
-          <div class="event-promo-copy">
-            <p class="event-eyebrow">OPENING COMMEMORATION EVENT</p>
-            <h2>개업 기념 이벤트</h2>
-            <p class="event-period">9월 말까지</p>
-            <p class="event-lead">편백 피톤치드 체험 고객을 위한 한정 혜택입니다.</p>
-          </div>
-          <div class="event-benefits" aria-label="이벤트 혜택">
-            <article>
-              <span>01</span>
-              <strong>10회권 구매 혜택</strong>
-              <p>편백 피톤치드 체험권 10회 구매 시 체험권 2회 추가 제공</p>
-            </article>
-            <article>
-              <span>02</span>
-              <strong>지인 추천 혜택</strong>
-              <p>체험 후 지인에게 방문을 추천하면 체험권 1회 무료 제공</p>
-            </article>
-            <article>
-              <span>03</span>
-              <strong>체험 후기 혜택</strong>
-              <p>체험 후기를 작성하면 체험권 1회 무료 제공</p>
-            </article>
-            <article>
-              <span>04</span>
-              <strong>전 고객 제공</strong>
-              <p>이벤트 기간 중 모든 체험 고객에게 산삼식혜(Wild Ginseng Sikhye) 무료 제공</p>
-            </article>
-          </div>
-        </div>
-      </section>
+  const phoneHref = links.phone ? `tel:${normalizePhone(links.phone)}` : "";
+  const smsHref = links.sms ? `sms:${normalizePhone(links.sms)}` : "";
+  const emailHref = links.email ? `mailto:${links.email}` : "";
+  applyLink("[data-link='phone']", phoneHref, "전화번호 입력 필요");
+  applyLink("[data-link='sms']", smsHref, "문자번호 입력 필요");
+  applyLink("[data-link='email']", emailHref, "이메일 입력 필요");
+  setText("[data-phone-text]", links.phone || "추후 입력 필요");
+};
 
-      <!-- 체험 소개 섹션: 의료 효능 단정 표현 없이 감각과 휴식 중심으로 작성했습니다. -->
-      <section class="section" id="experience">
-        <div class="container intro-layout">
-          <div data-reveal>
-            <p class="section-kicker">EXPERIENCE</p>
-            <h2 class="section-title">편백 향이 머무는 배럴 찜질 체험</h2>
-            <p class="section-lead">가족, 지인, 중장년 방문객이 편안하게 머물 수 있는 체험형 공간으로 소개합니다.</p>
-            <ul class="feature-list">
-              <li>
-                <strong>편백 피톤치드 체험</strong>
-                편백 소재의 향과 분위기를 느끼는 체험입니다.
-              </li>
-              <li>
-                <strong>배럴 찜질방</strong>
-                둥근 목재 공간에서 머무는 대표 체험입니다.
-              </li>
-              <li>
-                <strong>가족 친화적 휴식</strong>
-                가족, 지인, 소규모 방문객을 위한 문의 동선을 제공합니다.
-              </li>
-            </ul>
-          </div>
-          <div class="intro-photo-grid" data-reveal>
-            <figure class="intro-photo">
-              <img src="assets/images/barrel-lounge.webp" alt="청남대 웰니스타운 배럴 찜질 시설">
-              <figcaption>배럴 찜질 시설</figcaption>
-            </figure>
-            <figure class="intro-photo">
-              <img src="assets/images/heater-room.webp" alt="청남대 웰니스타운 찜질방 내부 난로">
-              <figcaption>따뜻한 내부 공간</figcaption>
-            </figure>
-            <figure class="intro-photo">
-              <img src="assets/images/view-flowers.webp" alt="청남대 웰니스타운 주변 자연 풍경">
-              <figcaption>주변 자연 풍경</figcaption>
-            </figure>
-            <figure class="intro-photo">
-              <img src="assets/images/forest-experience.webp" alt="청남대 웰니스타운 숲 체험">
-              <figcaption>숲 체험</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+const initNavigation = () => {
+  const toggle = document.querySelector(".nav-toggle");
+  const nav = document.querySelector(".site-nav");
+  if (!toggle || !nav) return;
 
-      <!-- 프로그램 섹션: 수정 위치 - 실제 프로그램명, 가격, 소요시간이 확정되면 문구를 교체하세요. -->
-      <section class="section section-alt" id="program">
-        <div class="container">
-          <p class="section-kicker" data-reveal>PROGRAM</p>
-          <h2 class="section-title" data-reveal>주요 프로그램</h2>
-          <p class="section-lead" data-reveal>예약 가능 시간은 09:00~12:00, 12:00~15:00, 15:00~18:00, 18:00~21:00입니다.</p>
-          <div class="program-grid">
-            <article class="program-item" data-reveal>
-              <span>01</span>
-              <h3>편백 향 체험</h3>
-              <p>편백 향과 공간 분위기를 소개하는 기본 체험입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>02</span>
-              <h3>배럴 찜질 체험</h3>
-              <p>목재 배럴 공간에서 머무는 대표 프로그램입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>03</span>
-              <h3>단체·가족 문의</h3>
-              <p>가족 모임과 소규모 방문은 별도 문의로 안내합니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
+  toggle.addEventListener("click", () => {
+    const expanded = toggle.getAttribute("aria-expanded") === "true";
+    toggle.setAttribute("aria-expanded", String(!expanded));
+    nav.classList.toggle("is-open", !expanded);
+  });
 
-      <!-- 요금 안내 섹션: 업로드된 현장 안내판 기준으로 작성했습니다. -->
-      <section class="section" id="pricing">
-        <div class="container">
-          <p class="section-kicker" data-reveal>PRICE</p>
-          <h2 class="section-title" data-reveal>이용요금</h2>
-          <p class="section-lead" data-reveal>현장 안내판 기준입니다. 예약금은 받지 않습니다.</p>
-          <div class="price-layout">
-            <section class="price-group" data-reveal>
-              <h3>체험비</h3>
-              <dl class="price-list">
-                <div><dt>2인</dt><dd>40,000원</dd></div>
-                <div><dt>3인</dt><dd>50,000원</dd></div>
-                <div><dt>4인</dt><dd>60,000원</dd></div>
-                <div><dt>추가 인원</dt><dd>1인 15,000원</dd></div>
-                <div><dt>찜질복·수건 대여</dt><dd>5,000원</dd></div>
-              </dl>
-            </section>
-            <section class="price-group" data-reveal>
-              <h3>즐길거리</h3>
-              <dl class="price-list">
-                <div><dt>산삼식혜</dt><dd>5,000원</dd></div>
-                <div><dt>산삼꿀차</dt><dd>5,000원</dd></div>
-                <div><dt>산삼미숫가루</dt><dd>5,000원</dd></div>
-                <div><dt>산삼동동주</dt><dd>10,000원</dd></div>
-                <div><dt>컵라면</dt><dd>4,000원</dd></div>
-                <div><dt>구운계란</dt><dd>2,000원</dd></div>
-              </dl>
-            </section>
-          </div>
-        </div>
-      </section>
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", () => {
+      toggle.setAttribute("aria-expanded", "false");
+      nav.classList.remove("is-open");
+    });
+  });
+};
 
-      <!-- 현장 사진 섹션: 업로드된 실제 사진을 웹용으로 최적화해 사용합니다. -->
-      <section class="section section-alt" id="gallery">
-        <div class="container">
-          <p class="section-kicker" data-reveal>GALLERY</p>
-          <h2 class="section-title" data-reveal>현장 사진</h2>
-          <p class="section-lead" data-reveal>배럴 찜질 시설, 주변 풍경, 숲 체험 사진입니다.</p>
-          <div class="gallery-grid">
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/barrel-lounge.webp" alt="배럴 찜질 시설과 휴식 공간">
-              <figcaption>배럴 찜질 시설</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/heater-room.webp" alt="배럴 찜질방 내부 난로">
-              <figcaption>찜질방 내부</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/view-flowers.webp" alt="청남대 웰니스타운 주변 산과 꽃 풍경">
-              <figcaption>주변 풍경</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/forest-experience.webp" alt="숲 체험에 참여한 방문객들">
-              <figcaption>숲 체험</figcaption>
-            </figure>
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/forest-guide.webp" alt="숲에서 설명을 듣는 방문객들">
-              <figcaption>단체 방문 안내</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/entrance-banner.webp" alt="청남대 웰니스타운 외부 안내 배너">
-              <figcaption>외부 안내</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/price-sign.webp" alt="청남대 웰니스타운 현장 요금 안내판">
-              <figcaption>현장 안내판</figcaption>
-            </figure>
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/mountain-view.webp" alt="청남대 웰니스타운 주변 산 전망">
-              <figcaption>산 전망</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/sunset-view.webp" alt="청남대 웰니스타운 주변 노을 풍경">
-              <figcaption>노을 풍경</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/forest-walk.webp" alt="청남대 웰니스타운 숲길 안내 모습">
-              <figcaption>숲길 안내</figcaption>
-            </figure>
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/exterior-front.webp" alt="청남대 웰니스타운 외부 전경">
-              <figcaption>외부 전경</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/exterior-forest.webp" alt="숲과 함께 보이는 청남대 웰니스타운 시설">
-              <figcaption>숲 옆 시설</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/exterior-yard.webp" alt="청남대 웰니스타운 진입 공간">
-              <figcaption>진입 공간</figcaption>
-            </figure>
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/sunset-road.webp" alt="청남대 웰니스타운 주변 노을길">
-              <figcaption>노을길</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/gallery-new-view.webp" alt="청남대 웰니스타운 주변 산과 마을 전망">
-              <figcaption>마을 전망</figcaption>
-            </figure>
-            <figure class="gallery-item" data-reveal>
-              <img src="assets/images/gallery-new-sign.webp" alt="청남대 웰니스타운 산삼 이미지">
-              <figcaption>산삼 이미지</figcaption>
-            </figure>
-            <figure class="gallery-item gallery-wide" data-reveal>
-              <img src="assets/images/gallery-new-promo.webp" alt="청남대 웰니스타운 홍보 이미지">
-              <figcaption>홍보 이미지</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
+const initReveal = () => {
+  const nodes = document.querySelectorAll("[data-reveal]");
+  if (!("IntersectionObserver" in window)) {
+    nodes.forEach((node) => node.classList.add("is-visible"));
+    return;
+  }
 
-      <!-- 이용 흐름 섹션: 예약 수단이 확정되기 전에도 홈페이지 흐름을 이해할 수 있게 구성했습니다. -->
-      <section class="section" id="guide">
-        <div class="container">
-          <p class="section-kicker" data-reveal>VISIT GUIDE</p>
-          <h2 class="section-title" data-reveal>이용 순서</h2>
-          <div class="flow">
-            <article class="flow-step" data-reveal>
-              <b>STEP 1</b>
-              <h3>운영 정보 확인</h3>
-              <p>매일 09:00~21:00 운영합니다.</p>
-            </article>
-            <article class="flow-step" data-reveal>
-              <b>STEP 2</b>
-              <h3>예약 또는 문의</h3>
-              <p>예약폼을 작성하거나 전화·문자로 문의합니다.</p>
-            </article>
-            <article class="flow-step" data-reveal>
-              <b>STEP 3</b>
-              <h3>오시는 길 확인</h3>
-              <p>충청북도 청주시 상당구 문의면 미천리 638-1로 방문합니다.</p>
-            </article>
-            <article class="flow-step" data-reveal>
-              <b>STEP 4</b>
-              <h3>현장 체험</h3>
-              <p>준비물과 안전 안내를 확인합니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("is-visible");
+          observer.unobserve(entry.target);
+        }
+      });
+    },
+    { threshold: 0.16 }
+  );
 
-      <!-- 공식 채널 섹션: 실제 URL은 assets/js/config.js에서 관리합니다. -->
-      <section class="section section-alt" id="channels">
-        <div class="container">
-          <p class="section-kicker" data-reveal>OFFICIAL CHANNELS</p>
-          <h2 class="section-title" data-reveal>공식 채널</h2>
-          <p class="section-lead" data-reveal>스마트플레이스, 스마트스토어, 유튜브, 인스타그램, 네이버블로그를 한곳에서 연결합니다.</p>
-          <div class="channel-grid">
-            <a class="channel-link" href="#pending-info" data-link="smartPlace" data-reveal>
-              <span>네이버</span>
-              <strong>스마트플레이스</strong>
-              <small>장소 정보와 방문 안내</small>
-            </a>
-            <a class="channel-link" href="#pending-info" data-link="smartPlaceBooking" data-reveal>
-              <span>네이버</span>
-              <strong>예약폼</strong>
-              <small>구글폼으로 예약 문의</small>
-            </a>
-            <a class="channel-link" href="#pending-info" data-link="smartStore" data-reveal>
-              <span>Store</span>
-              <strong>스마트스토어</strong>
-              <small>동우산삼 상품 페이지</small>
-            </a>
-            <a class="channel-link" href="#pending-info" data-link="youtube" data-reveal>
-              <span>Video</span>
-              <strong>YouTube</strong>
-              <small>현장 영상과 체험 소개</small>
-            </a>
-            <a class="channel-link" href="#pending-info" data-link="instagram" data-reveal>
-              <span>SNS</span>
-              <strong>Instagram</strong>
-              <small>사진과 짧은 소식</small>
-            </a>
-            <a class="channel-link" href="#pending-info" data-link="naverBlog" data-reveal>
-              <span>Blog</span>
-              <strong>네이버블로그</strong>
-              <small>자세한 안내와 후기</small>
-            </a>
-          </div>
-        </div>
-      </section>
+  nodes.forEach((node) => observer.observe(node));
+};
 
-      <!-- 예약 문의 CTA: 수정 위치 - 실제 연결 수단이 정해지면 config.js만 변경하면 됩니다. -->
-      <section class="section" id="contact">
-        <div class="container">
-          <div class="notice-band" data-reveal>
-            <div>
-              <h2>예약폼 또는 전화로 문의하세요.</h2>
-              <p>예약폼 접수 후 확인 연락을 드립니다. 대표전화 010-4924-3435</p>
-            </div>
-            <div class="cta-row">
-              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약폼 작성</a>
-              <a class="button button-light" href="tel:01049243435" data-link="phone">전화 문의</a>
-              <a class="button button-light" href="sms:01049243435" data-link="sms">문자 문의</a>
-            </div>
-          </div>
-
-          <div class="info-grid">
-            <article class="info-item" data-reveal>
-              <h3>주소</h3>
-              <p data-address>충청북도 청주시 상당구 문의면 미천리 638-1</p>
-            </article>
-            <article class="info-item" data-reveal>
-              <h3>운영시간</h3>
-              <p data-hours>매일 09:00~21:00</p>
-              <p data-closed-days>휴무일 없음</p>
-            </article>
-            <article class="info-item" data-reveal>
-              <h3>주차</h3>
-              <p data-parking>주차 가능</p>
-            </article>
-            <article class="info-item" data-reveal>
-              <h3>예약 정책</h3>
-              <p data-policy>4부제 예약 가능: 09:00~12:00 / 12:00~15:00 / 15:00~18:00 / 18:00~21:00 · 예약금 없음</p>
-            </article>
-          </div>
-
-          <div id="pending-info" class="info-item" data-reveal>
-            <h3>추가 확인 필요</h3>
-            <p>예약폼, 전화, 문자로 문의해 주세요. 예약금은 없습니다.</p>
-            <ul class="pending-list">
-              <li>카카오톡 채널 URL</li>
-              <li>정확한 네이버/카카오 장소 링크</li>
-              <li>준비물 및 안전 안내</li>
-            </ul>
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <!-- 하단 정보: 수정 위치 - 실제 사업자 정보가 있으면 법적 검토 후 추가하세요. -->
-    <footer class="footer">
-      <div class="footer-inner">
-        <div>
-          <strong data-company-name>청남대 웰니스타운</strong>
-          <p>대표자: <span data-owner>조동우</span> · 사업자등록번호: <span data-business-number>233-88-01155</span></p>
-          <p>전화: <span data-phone-text>010-4924-3435</span></p>
-          <p>이메일: <span data-email-text>gmlwns70@gmail.com</span></p>
-          <p>주소: <span data-address>충청북도 청주시 상당구 문의면 미천리 638-1</span></p>
-        </div>
-        <div class="footer-links" aria-label="외부 링크">
-          <a href="#pending-info" data-link="smartPlace">스마트플레이스</a>
-          <a href="#pending-info" data-link="smartStore">스마트스토어</a>
-          <a href="#pending-info" data-link="naverBlog">네이버블로그</a>
-          <a href="#pending-info" data-link="kakao">카카오톡</a>
-          <a href="#pending-info" data-link="instagram">Instagram</a>
-          <a href="#pending-info" data-link="youtube">YouTube</a>
-          <a href="#pending-info" data-link="sms">문자</a>
-          <a href="mailto:gmlwns70@gmail.com" data-link="email">이메일</a>
-          <a href="privacy.html">개인정보 처리방침</a>
-        </div>
-      </div>
-    </footer>
-
-    <script src="assets/js/config.js?v=20260715-2"></script>
-    <script src="assets/js/script.js?v=20260715-2"></script>
-  </body>
-</html>
+document.addEventListener("DOMContentLoaded", () => {
+  initConfigBindings();
+  initNavigation();
+  initReveal();
+});
