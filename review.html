@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>방문 후기 남기기 | 청남대 웰니스타운</title>
+    <meta name="description" content="청남대 웰니스타운 방문 경험을 네이버 또는 구글에서 간편하게 공유해 주세요.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/review.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="방문 후기 남기기 | 청남대 웰니스타운">
+    <meta property="og:description" content="청남대 웰니스타운 방문 경험을 네이버 또는 구글에서 간편하게 공유해 주세요.">
+    <meta property="og:image" content="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/assets/images/hero-wellness.jpg?v=20260713-4">
+    <meta property="og:url" content="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/review.html">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+      body.review-page {
+        min-height: 100svh;
+        background:
+          linear-gradient(180deg, rgba(251, 247, 237, 0.88), rgba(240, 234, 220, 0.98)),
+          url("assets/images/hero-wellness.jpg?v=20260713-4") center top / cover no-repeat fixed;
+      }
+
+      .review-main {
+        min-height: calc(100svh - var(--header-height));
+        padding: 72px 0 92px;
+      }
+
+      .review-wrap {
+        width: min(960px, calc(100% - 32px));
+        margin: 0 auto;
+      }
+
+      .review-hero {
+        display: grid;
+        gap: 18px;
+        text-align: center;
+      }
+
+      .review-hero h1 {
+        margin: 0;
+        color: var(--forest-deep);
+        font-family: "Noto Serif KR", "Apple SD Gothic Neo", serif;
+        font-size: clamp(38px, 7vw, 66px);
+        line-height: 1.12;
+        letter-spacing: 0;
+      }
+
+      .review-hero p {
+        max-width: 720px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: clamp(17px, 2.4vw, 21px);
+      }
+
+      .review-choice-panel {
+        margin-top: 42px;
+        padding: 34px;
+        border: 1px solid var(--line);
+        border-radius: var(--radius);
+        background: rgba(255, 255, 255, 0.82);
+        box-shadow: 0 24px 70px rgba(24, 61, 43, 0.16);
+      }
+
+      .review-buttons {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 18px;
+      }
+
+      .review-button {
+        min-height: 86px;
+        display: grid;
+        align-content: center;
+        gap: 4px;
+        padding: 20px;
+        border-radius: var(--radius);
+        border: 1px solid transparent;
+        font-weight: 900;
+        text-align: center;
+        transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+      }
+
+      .review-button:hover,
+      .review-button:focus-visible {
+        transform: translateY(-2px);
+        box-shadow: 0 16px 34px rgba(24, 61, 43, 0.16);
+      }
+
+      .review-button small {
+        color: inherit;
+        font-size: 14px;
+        font-weight: 700;
+        opacity: 0.78;
+      }
+
+      .review-button-naver {
+        background: #183d2b;
+        color: var(--white);
+      }
+
+      .review-button-google {
+        background: var(--hinoki);
+        color: var(--forest-deep);
+      }
+
+      .review-status {
+        display: none;
+        margin: 22px 0 0;
+        padding: 16px 18px;
+        border-left: 4px solid var(--hinoki);
+        border-radius: var(--radius);
+        background: rgba(217, 184, 131, 0.18);
+        color: var(--forest-deep);
+        font-weight: 800;
+      }
+
+      .review-status.is-visible {
+        display: block;
+      }
+
+      .review-guide {
+        margin-top: 36px;
+        padding-top: 30px;
+        border-top: 1px solid var(--line);
+      }
+
+      .review-guide h2 {
+        margin: 0 0 16px;
+        color: var(--forest);
+        font-size: clamp(24px, 4vw, 34px);
+      }
+
+      .review-guide ul {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: grid;
+        gap: 12px;
+      }
+
+      .review-guide li {
+        position: relative;
+        padding-left: 22px;
+        color: var(--muted);
+        font-size: 17px;
+      }
+
+      .review-guide li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 0.7em;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--hinoki);
+      }
+
+      .review-note {
+        margin: 26px 0 0;
+        color: var(--forest-deep);
+        font-weight: 800;
+      }
+
+      .review-back {
+        margin-top: 28px;
+        text-align: center;
+      }
+
+      @media (max-width: 640px) {
+        .review-main {
+          padding: 48px 0 82px;
+        }
+
+        .review-choice-panel {
+          padding: 22px;
+        }
+
+        .review-buttons {
+          grid-template-columns: 1fr;
+          gap: 14px;
+        }
+
+        .review-button {
+          min-height: 76px;
+          font-size: 17px;
+        }
+      }
+    </style>
+  </head>
+  <body class="review-page">
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+    <!-- 상단 메뉴: 홈페이지와 같은 브랜드 헤더를 사용합니다. -->
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand-mark" href="index.html" aria-label="청남대웰니스타운 홈으로 이동">
+          <img src="assets/images/logo.webp" alt="청남대 웰니스타운 로고">
+          <span class="brand-copy">
+            <span data-brand-name>청남대 웰니스타운</span>
+            <small data-tagline>편백 향이 머무는 힐링 공간</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span>
+        </button>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="index.html#experience">소개</a>
+          <a href="index.html#program">프로그램</a>
+          <a href="index.html#pricing">요금</a>
+          <a href="index.html#gallery">현장 사진</a>
+          <a href="index.html#contact">문의</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main" class="review-main">
+      <div class="review-wrap">
+        <!-- 후기 페이지 핵심 안내: 수정 위치 - 문구 변경 시 솔직한 후기 안내 원칙을 유지하세요. -->
+        <section class="review-hero" aria-labelledby="review-title">
+          <p class="section-kicker">VISIT REVIEW</p>
+          <h1 id="review-title">오늘의 힐링은 어떠셨나요?</h1>
+          <p>청남대 웰니스타운에서 경험하신 소중한 이야기를 들려주세요.<br>고객님의 솔직한 후기는 더 나은 서비스와 공간을 만드는 데 큰 도움이 됩니다.</p>
+        </section>
+
+        <!-- 후기 플랫폼 선택: 링크는 assets/js/config.js의 NAVER_REVIEW_URL, GOOGLE_REVIEW_URL에서 관리합니다. -->
+        <section class="review-choice-panel" aria-label="후기 작성 플랫폼 선택">
+          <div class="review-buttons">
+            <a class="review-button review-button-naver" href="#review-link-needed" data-review-platform="naver" aria-label="네이버에서 청남대 웰니스타운 후기 남기기">
+              네이버에서 후기 남기기
+              <small>네이버 방문 후기 작성 화면으로 이동</small>
+            </a>
+            <a class="review-button review-button-google" href="#review-link-needed" data-review-platform="google" aria-label="구글에서 청남대 웰니스타운 후기 남기기">
+              구글에서 후기 남기기
+              <small>구글 후기 작성 화면으로 이동</small>
+            </a>
+          </div>
+          <p id="review-link-needed" class="review-status" role="status" aria-live="polite">관리자 안내: 후기 작성 링크가 아직 등록되지 않았습니다. assets/js/config.js에서 NAVER_REVIEW_URL 또는 GOOGLE_REVIEW_URL 값을 입력해 주세요.</p>
+
+          <div class="review-guide">
+            <h2>어떤 이야기를 남기면 좋을까요?</h2>
+            <ul>
+              <li>어떤 체험이나 서비스를 이용하셨나요?</li>
+              <li>가장 만족스러웠던 점은 무엇인가요?</li>
+              <li>편백 체험 공간과 주변 자연환경은 어떠셨나요?</li>
+              <li>누구와 함께 방문하셨나요?</li>
+              <li>다시 방문하고 싶은 이유가 있다면 알려주세요.</li>
+            </ul>
+            <p class="review-note">솔직한 방문 경험을 들려주세요. 긍정적이거나 아쉬웠던 점 모두 편하게 남겨주시면 서비스 개선에 소중하게 활용하겠습니다.</p>
+          </div>
+        </section>
+
+        <div class="review-back">
+          <a class="button button-light" href="index.html">홈페이지로 돌아가기</a>
+        </div>
+      </div>
+    </main>
+
+    <!-- 하단 정보: 개인정보 입력 폼 없이 외부 후기 작성 화면으로만 안내합니다. -->
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong data-company-name>청남대 웰니스타운</strong>
+          <p>전화: <span data-phone-text>010-4924-3435</span></p>
+          <p>이메일: <span data-email-text>gmlwns70@gmail.com</span></p>
+          <p>주소: <span data-address>충청북도 청주시 상당구 문의면 미천리 638-1</span></p>
+        </div>
+        <div class="footer-links" aria-label="하단 링크">
+          <a href="index.html">홈</a>
+          <a href="index.html#contact">예약 문의</a>
+          <a href="privacy.html">개인정보 처리방침</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/config.js?v=20260724-review"></script>
+    <script src="assets/js/script.js?v=20260715-5"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        const config = window.SITE_CONFIG || {};
+        const links = config.links || {};
+        const reviewLinks = {
+          naver: links.naverReview || window.NAVER_REVIEW_URL || "",
+          google: links.googleReview || window.GOOGLE_REVIEW_URL || ""
+        };
+        const status = document.querySelector(".review-status");
+
+        document.querySelectorAll("[data-review-platform]").forEach(function (button) {
+          const platform = button.getAttribute("data-review-platform");
+          const url = reviewLinks[platform];
+
+          if (url) {
+            button.href = url;
+            button.target = "_blank";
+            button.rel = "noopener noreferrer";
+            return;
+          }
+
+          button.addEventListener("click", function (event) {
+            event.preventDefault();
+            if (!status) return;
+            status.classList.add("is-visible");
+            status.focus?.();
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
