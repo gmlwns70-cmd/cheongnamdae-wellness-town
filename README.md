@@ -75,12 +75,15 @@ links: {
 
 ## 방문 후기 페이지 관리
 
-방문 후기 페이지 주소는 아래 두 가지입니다.
+방문 후기 페이지의 운영 기준 주소는 아래 주소입니다.
 
-- 기본 주소: `https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/review.html`
-- 보조 주소: `https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/review/`
+```text
+https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/review.html
+```
 
-CRM 문자, 카카오톡 메시지, 안내문, QR코드에는 기본 주소 `review.html`을 사용하세요.
+CRM 문자, 카카오톡 메시지, 안내문, QR코드에는 위 `review.html` 주소를 사용하세요.
+
+`review/index.html` 파일도 보조 경로 검토용으로 포함되어 있지만, 실제 운영과 QR코드에는 공개 확인이 완료된 `review.html` 주소를 우선 사용합니다.
 
 ### 네이버 후기 링크 넣는 방법
 
