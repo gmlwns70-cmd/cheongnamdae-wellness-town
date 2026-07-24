@@ -1,0 +1,29 @@
+name: Verify GitHub Pages review page
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Wait for Pages propagation
+        run: sleep 90
+      - name: Verify review page is public
+        run: |
+          set -euo pipefail
+          base="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town"
+          curl -fsSL "$base/review.html" -o review.html
+          grep -q "오늘의 힐링은 어떠셨나요" review.html
+          grep -q "네이버에서 후기 남기기" review.html
+          grep -q "구글에서 후기 남기기" review.html
+          curl -fsSL "$base/review/" -o review-folder.html
+          grep -q "방문 후기 남기기" review-folder.html
+          curl -fsSL "$base/assets/js/config.js" -o config.js
+          grep -q "NAVER_REVIEW_URL" config.js
+          grep -q "GOOGLE_REVIEW_URL" config.js
+          curl -fsSL "$base/" -o index.html
+          grep -q "청남대 웰니스타운" index.html
