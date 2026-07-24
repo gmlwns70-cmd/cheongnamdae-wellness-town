@@ -1,7 +1,13 @@
 /* 청남대웰니스타운 링크/연락처 설정 파일
-   수정 위치: 예약, 지도, SNS 링크가 확정되면 아래 값만 바꾸세요.
+   수정 위치: 예약, 지도, SNS, 후기 링크가 확정되면 아래 값만 바꾸세요.
    빈 문자열("")은 아직 연결하지 않는 항목입니다.
 */
+const NAVER_REVIEW_URL = ""; // 추후 입력 필요: 네이버 방문 후기 작성 URL
+const GOOGLE_REVIEW_URL = ""; // 추후 입력 필요: 구글 방문 후기 작성 URL
+
+window.NAVER_REVIEW_URL = NAVER_REVIEW_URL;
+window.GOOGLE_REVIEW_URL = GOOGLE_REVIEW_URL;
+
 window.SITE_CONFIG = {
   brandName: "청남대 웰니스타운",
   tagline: "청남대 인근 편백 배럴 찜질과 숲 휴식",
@@ -9,6 +15,9 @@ window.SITE_CONFIG = {
   links: {
     booking: "https://forms.gle/XAQvZZRyChFnyE5C9",
     googleForm: "https://forms.gle/XAQvZZRyChFnyE5C9",
+    reviewPage: "review.html",
+    naverReview: NAVER_REVIEW_URL,
+    googleReview: GOOGLE_REVIEW_URL,
     smartPlace: "https://map.naver.com/p/search/%EC%B2%AD%EB%82%A8%EB%8C%80%20%EC%9B%B0%EB%8B%88%EC%8A%A4%ED%83%80%EC%9A%B4",
     smartPlaceBooking: "https://forms.gle/XAQvZZRyChFnyE5C9",
     smartStore: "https://smartstore.naver.com/kfood_wild_ginseng",
@@ -50,16 +59,25 @@ window.SITE_CONFIG = {
     .quick-faq details:last-child { border-bottom: 1px solid rgba(24,61,43,.18); }
     .quick-faq summary { cursor: pointer; font-weight: 800; color: #183d2b; }
     .quick-faq p { margin: 12px 0 0; color: #68675e; }
+    .review-home-section { background: #fbf7ed; }
+    .review-home-panel { width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 72px 0; display: grid; grid-template-columns: 1fr auto; gap: 28px; align-items: center; border-top: 1px solid rgba(24,61,43,.18); }
+    .review-home-panel h2 { margin: 0; color: #0f291d; font-family: "Noto Serif KR", serif; font-size: clamp(28px, 4.6vw, 46px); line-height: 1.18; }
+    .review-home-panel p { max-width: 680px; margin: 14px 0 0; color: #68675e; font-size: 17px; }
+    .review-home-panel .button { min-width: 190px; }
+    .footer-links a[data-review-link] { color: #f5dfb6; font-weight: 900; }
     .mobile-action-dock { display: none; }
     @media (max-width: 720px) {
-      body { padding-bottom: 72px; }
+      body { padding-bottom: 82px; }
       .trust-strip__inner { grid-template-columns: repeat(2, 1fr); }
       .trust-strip__item:nth-child(2) { border-right: 0; }
       .trust-strip__item:nth-child(-n+2) { border-bottom: 1px solid rgba(24,61,43,.12); }
-      .mobile-action-dock { position: fixed; z-index: 90; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; padding: 10px 12px calc(10px + env(safe-area-inset-bottom)); background: rgba(251,247,237,.97); border-top: 1px solid rgba(24,61,43,.18); backdrop-filter: blur(14px); }
-      .mobile-action-dock a { min-height: 48px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 900; }
+      .review-home-panel { grid-template-columns: 1fr; padding: 54px 0; }
+      .review-home-panel .button { width: 100%; min-height: 54px; }
+      .mobile-action-dock { position: fixed; z-index: 90; left: 0; right: 0; bottom: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; padding: 10px 10px calc(10px + env(safe-area-inset-bottom)); background: rgba(251,247,237,.97); border-top: 1px solid rgba(24,61,43,.18); backdrop-filter: blur(14px); }
+      .mobile-action-dock a { min-height: 50px; display: flex; align-items: center; justify-content: center; border-radius: 8px; font-weight: 900; font-size: 14px; text-align: center; }
       .mobile-action-dock__book { background: #d9b883; color: #0f291d; }
       .mobile-action-dock__call { background: #183d2b; color: #fff; }
+      .mobile-action-dock__review { background: #fff; color: #183d2b; border: 1px solid rgba(24,61,43,.2); }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
@@ -68,6 +86,7 @@ window.SITE_CONFIG = {
   document.head.appendChild(style);
 
   document.addEventListener("DOMContentLoaded", function () {
+    const reviewPage = window.SITE_CONFIG.links.reviewPage || "review.html";
     const lead = document.querySelector(".hero .lead");
     if (lead) {
       lead.textContent = "청남대와 대청호 여행길에 편백 향, 배럴 찜질, 숲의 여유를 함께 경험해 보세요.";
@@ -75,6 +94,14 @@ window.SITE_CONFIG = {
 
     const primaryBooking = document.querySelector('.hero [data-link="booking"]');
     if (primaryBooking) primaryBooking.textContent = "체험 예약하기";
+
+    const nav = document.querySelector(".site-nav");
+    if (nav && !nav.querySelector('[href="review.html"]')) {
+      const reviewNavLink = document.createElement("a");
+      reviewNavLink.href = reviewPage;
+      reviewNavLink.textContent = "후기 남기기";
+      nav.appendChild(reviewNavLink);
+    }
 
     const hero = document.querySelector(".hero");
     if (hero && !document.querySelector(".trust-strip")) {
@@ -108,13 +135,40 @@ window.SITE_CONFIG = {
       contact.insertAdjacentElement("beforebegin", faq);
     }
 
+    if (contact && !document.querySelector("#visit-review")) {
+      const reviewSection = document.createElement("section");
+      reviewSection.id = "visit-review";
+      reviewSection.className = "review-home-section";
+      reviewSection.setAttribute("aria-label", "방문 후기 남기기");
+      reviewSection.innerHTML = `
+        <div class="review-home-panel" data-reveal>
+          <div>
+            <p class="section-kicker">VISIT REVIEW</p>
+            <h2>오늘의 힐링은 어떠셨나요?</h2>
+            <p>솔직한 방문 경험을 들려주세요. 고객님의 의견은 서비스 개선에 소중하게 활용됩니다.</p>
+          </div>
+          <a class="button button-dark" href="${reviewPage}" aria-label="청남대 웰니스타운 방문 후기 남기기">방문 후기 남기기</a>
+        </div>`;
+      contact.insertAdjacentElement("beforebegin", reviewSection);
+    }
+
+    const footerLinks = document.querySelector(".footer-links");
+    if (footerLinks && !footerLinks.querySelector("[data-review-link]")) {
+      const reviewFooterLink = document.createElement("a");
+      reviewFooterLink.href = reviewPage;
+      reviewFooterLink.textContent = "방문 후기 남기기";
+      reviewFooterLink.setAttribute("data-review-link", "true");
+      footerLinks.insertBefore(reviewFooterLink, footerLinks.firstChild);
+    }
+
     if (!document.querySelector(".mobile-action-dock")) {
       const dock = document.createElement("nav");
       dock.className = "mobile-action-dock";
-      dock.setAttribute("aria-label", "모바일 빠른 문의");
+      dock.setAttribute("aria-label", "모바일 빠른 메뉴");
       dock.innerHTML = `
-        <a class="mobile-action-dock__book" href="${window.SITE_CONFIG.links.booking}">체험 예약</a>
-        <a class="mobile-action-dock__call" href="tel:${window.SITE_CONFIG.links.phone.replace(/-/g, "")}">전화 문의</a>`;
+        <a class="mobile-action-dock__call" href="tel:${window.SITE_CONFIG.links.phone.replace(/-/g, "")}">전화 문의</a>
+        <a class="mobile-action-dock__book" href="${window.SITE_CONFIG.links.booking}">예약하기</a>
+        <a class="mobile-action-dock__review" href="${reviewPage}">후기</a>`;
       document.body.appendChild(dock);
     }
   });
