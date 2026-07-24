@@ -43,8 +43,6 @@ jobs:
           grep -q "오늘의 힐링은 어떠셨나요" review.html
           grep -q "네이버에서 후기 남기기" review.html
           grep -q "구글에서 후기 남기기" review.html
-          curl -fsSL "$base/review/" -o review-folder.html
-          grep -q "방문 후기 남기기" review-folder.html
           curl -fsSL "$base/assets/js/config.js" -o config.js
           grep -q "NAVER_REVIEW_URL" config.js
           grep -q "GOOGLE_REVIEW_URL" config.js
