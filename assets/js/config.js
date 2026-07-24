@@ -3,7 +3,7 @@
    빈 문자열("")은 아직 연결하지 않는 항목입니다.
 */
 const NAVER_REVIEW_URL = ""; // 추후 입력 필요: 네이버 방문 후기 작성 URL
-const GOOGLE_REVIEW_URL = ""; // 추후 입력 필요: 구글 방문 후기 작성 URL
+const GOOGLE_REVIEW_URL = "https://g.page/r/CctFkN-78iVREBM/review"; // 구글 방문 후기 작성 URL
 
 window.NAVER_REVIEW_URL = NAVER_REVIEW_URL;
 window.GOOGLE_REVIEW_URL = GOOGLE_REVIEW_URL;
