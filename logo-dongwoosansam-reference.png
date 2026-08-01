@@ -1,0 +1,15 @@
+// 청남대웰니스타운 링크/연락처 설정
+// 수정 위치: 실제 예약 링크, 지도 링크, 연락처가 확정되면 아래 값만 바꾸세요.
+window.SITE_CONFIG = {
+  booking: "", // 추후 입력 필요: 외부 예약 서비스 URL
+  googleForm: "", // 추후 입력 필요: 예약 신청 구글폼 URL
+  kakao: "", // 추후 입력 필요: 카카오톡 채널 또는 오픈채팅 URL
+  naverMap: "", // 추후 입력 필요: 네이버지도 URL
+  kakaoMap: "", // 추후 입력 필요: 카카오맵 URL
+  instagram: "", // 추후 입력 필요: 인스타그램 URL
+  youtube: "", // 추후 입력 필요: 유튜브 URL
+  phone: "", // 추후 입력 필요: 예) 010-0000-0000
+  sms: "", // 추후 입력 필요: 예) 010-0000-0000
+  reservationStatus: "예약 접수 준비 중",
+  primaryChannel: "추후 입력 필요"
+};
