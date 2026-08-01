@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>예약 관리 | 청남대웰니스타운</title>
+    <meta name="description" content="청남대 웰니스타운 예약 신청과 운영자용 구글시트 예약 현황 관리 흐름을 안내합니다.">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/reservation-management.html">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="청남대웰니스타운 예약 관리">
+    <meta property="og:description" content="구글폼으로 예약을 접수하고 구글시트에서 접수, 확인 중, 확정, 방문 완료, 취소 상태를 관리합니다.">
+    <meta property="og:image" content="assets/images/hero-wellness.jpg?v=20260713-4">
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="stylesheet" href="assets/css/style.css">
+  </head>
+  <body>
+    <a class="skip-link" href="#main">본문으로 바로가기</a>
+
+    <header class="site-header">
+      <div class="header-inner">
+        <a class="brand-mark" href="index.html" aria-label="청남대웰니스타운 홈">
+          <img src="assets/images/logo.webp" alt="청남대 웰니스타운 로고">
+          <span class="brand-copy">
+            <span data-brand-name>청남대 웰니스타운</span>
+            <small data-tagline>편백 향이 머무는 힐링 공간</small>
+          </span>
+        </a>
+        <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
+          <span></span>
+        </button>
+        <nav class="site-nav" aria-label="주요 메뉴">
+          <a href="index.html#experience">소개</a>
+          <a href="index.html#program">프로그램</a>
+          <a href="index.html#pricing">요금</a>
+          <a href="index.html#gallery">현장 사진</a>
+          <a href="reservation-management.html">예약 관리</a>
+          <a href="index.html#contact">문의</a>
+        </nav>
+      </div>
+    </header>
+
+    <main id="main">
+      <section class="hero" id="top" aria-label="청남대웰니스타운 예약 관리">
+        <div class="hero-inner">
+          <div class="hero-copy">
+            <p class="eyebrow">GOOGLE FORM + GOOGLE SHEETS</p>
+            <h1>예약 관리</h1>
+            <p class="lead">고객은 구글폼으로 신청하고, 운영자는 구글시트에서 단계별 예약 현황을 관리합니다.</p>
+            <div class="hero-actions" aria-label="예약 관리 주요 행동">
+              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약 신청하기</a>
+              <a class="button button-secondary" href="tel:01049243435" data-link="phone">전화 문의</a>
+              <a class="button button-secondary" href="index.html#contact">운영 정보 보기</a>
+            </div>
+            <p class="hero-note">신청자 개인정보가 포함되므로 예약 현황표는 공개 페이지에 표시하지 않습니다.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="customer-flow-title">
+        <div class="container">
+          <p class="section-kicker" data-reveal>CUSTOMER FLOW</p>
+          <h2 id="customer-flow-title" class="section-title" data-reveal>고객 예약 신청 흐름</h2>
+          <p class="section-lead" data-reveal>홈페이지는 예약 신청으로 연결하고, 실제 신청 내용은 구글폼 응답 시트에 자동 저장됩니다.</p>
+          <div class="flow">
+            <article class="flow-step" data-reveal>
+              <b>STEP 1</b>
+              <h3>예약폼 작성</h3>
+              <p>이름, 연락처, 희망 날짜, 시간대, 인원, 요청사항을 입력합니다.</p>
+            </article>
+            <article class="flow-step" data-reveal>
+              <b>STEP 2</b>
+              <h3>시트 자동 저장</h3>
+              <p>구글폼 응답이 구글시트의 예약 신청 목록에 쌓입니다.</p>
+            </article>
+            <article class="flow-step" data-reveal>
+              <b>STEP 3</b>
+              <h3>운영자 확인</h3>
+              <p>운영자가 일정과 인원을 확인한 뒤 상태를 변경합니다.</p>
+            </article>
+            <article class="flow-step" data-reveal>
+              <b>STEP 4</b>
+              <h3>고객 안내</h3>
+              <p>전화 또는 문자로 확정, 변경, 취소 안내를 진행합니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" aria-labelledby="status-title">
+        <div class="container">
+          <p class="section-kicker" data-reveal>STATUS BOARD</p>
+          <h2 id="status-title" class="section-title" data-reveal>단계별 예약 상태</h2>
+          <p class="section-lead" data-reveal>구글시트의 상태 칸에서 아래 단계 중 하나를 선택해 관리합니다.</p>
+          <div class="program-grid">
+            <article class="program-item" data-reveal>
+              <span>01</span>
+              <h3>접수</h3>
+              <p>고객이 구글폼을 제출한 직후의 기본 상태입니다.</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>02</span>
+              <h3>확인 중</h3>
+              <p>운영자가 날짜, 시간대, 인원 가능 여부를 확인하는 단계입니다.</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>03</span>
+              <h3>예약 확정</h3>
+              <p>고객에게 확정 안내를 완료한 예약입니다.</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>04</span>
+              <h3>변경 요청</h3>
+              <p>시간, 인원, 날짜 조정이 필요한 예약입니다.</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>05</span>
+              <h3>방문 완료</h3>
+              <p>고객 방문이 끝난 뒤 후기 안내나 재방문 안내에 활용합니다.</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>06</span>
+              <h3>취소</h3>
+              <p>취소 사유와 안내 완료 여부를 메모로 남깁니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="sheet-title">
+        <div class="container">
+          <p class="section-kicker" data-reveal>OPERATOR SHEET</p>
+          <h2 id="sheet-title" class="section-title" data-reveal>운영자용 구글시트 구성</h2>
+          <p class="section-lead" data-reveal>구글폼 응답 시트 옆에 관리용 칼럼을 추가해 실시간으로 예약 현황을 봅니다.</p>
+          <div class="info-grid">
+            <article class="info-item" data-reveal>
+              <h3>필수 입력 항목</h3>
+              <p>신청일시, 고객명, 연락처, 희망일, 시간대, 인원, 요청사항</p>
+            </article>
+            <article class="info-item" data-reveal>
+              <h3>운영자 관리 항목</h3>
+              <p>예약상태, 담당자, 확인일시, 안내방법, 최종확정일시, 운영메모</p>
+            </article>
+            <article class="info-item" data-reveal>
+              <h3>일정 중복 확인</h3>
+              <p>희망일과 시간대 기준으로 같은 시간 예약을 필터링해 확인합니다.</p>
+            </article>
+            <article class="info-item" data-reveal>
+              <h3>개인정보 주의</h3>
+              <p>구글시트 공유 권한은 운영자만 볼 수 있게 제한하세요. 운영 전 최종 검토 필요.</p>
+            </article>
+          </div>
+          <div class="notice-band" data-reveal>
+            <div>
+              <h2>구글폼 응답 시트를 예약 현황판으로 사용하세요.</h2>
+              <p>응답 탭은 원본으로 유지하고, 관리 탭에서 상태와 메모를 운영자가 업데이트하는 방식이 안전합니다.</p>
+            </div>
+            <div class="cta-row">
+              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약폼 열기</a>
+              <a class="button button-light" href="sms:01049243435" data-link="sms">문자 안내</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        <div>
+          <strong data-company-name>청남대 웰니스타운</strong>
+          <p>예약 현황표에는 개인정보가 포함되므로 공개 홈페이지에 표시하지 않습니다.</p>
+          <p>전화: <span data-phone-text>010-4924-3435</span></p>
+        </div>
+        <div class="footer-links" aria-label="외부 링크">
+          <a href="index.html">홈</a>
+          <a href="index.html#contact">문의</a>
+          <a href="privacy.html">개인정보 처리방침</a>
+        </div>
+      </div>
+    </footer>
+
+    <script src="assets/js/config.js?v=20260715-5"></script>
+    <script src="assets/js/script.js?v=20260715-5"></script>
+  </body>
+</html>
