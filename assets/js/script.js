@@ -65,6 +65,14 @@ const initConfigBindings = () => {
   setText("[data-phone-text]", links.phone || "추후 입력 필요");
 };
 
+const initReservationMenu = () => {
+  document.querySelectorAll(".site-nav a").forEach((link) => {
+    if (link.textContent.trim() === "예약 관리") {
+      link.href = "reservation-management.html";
+    }
+  });
+};
+
 const initNavigation = () => {
   const toggle = document.querySelector(".nav-toggle");
   const nav = document.querySelector(".site-nav");
@@ -108,6 +116,7 @@ const initReveal = () => {
 
 document.addEventListener("DOMContentLoaded", () => {
   initConfigBindings();
+  initReservationMenu();
   initNavigation();
   initReveal();
 });
