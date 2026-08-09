@@ -211,16 +211,49 @@
       return `${i+1}. ${strong}: ${p}`;
     }).join('\n\n');
 
-    const benefitIndex = prompt('수정할 혜택 번호를 선택하세요 (1-4):', '1');
+    const benefitIndex = prompt('수정할 혜택 번호를 선택하세요 (1-4):\n\n' + benefitList + '\n\n번호 입력:', '1');
     if (benefitIndex && benefitIndex >= 1 && benefitIndex <= 4) {
       const idx = parseInt(benefitIndex) - 1;
       const article = benefits[idx];
       
-      const newBenefit = prompt('새로운 혜택을 입력하세요:', article?.querySelector('strong')?.textContent);
+      // 혜택 제목 수정
+      const newBenefit = prompt('새로운 혜택 제목을 입력하세요:', article?.querySelector('strong')?.textContent);
       if (newBenefit) {
         const strong = article?.querySelector('strong');
         if (strong) strong.textContent = newBenefit;
-        showNotification('이벤트 혜택이 업데이트되었습니다.');
+        showNotification('이벤트 혜택 제목이 업데이트되었습니다.');
+      }
+
+      // 혜택 설명 수정
+      const newDesc = prompt('새로운 혜택 설명을 입력하세요:', article?.querySelector('p')?.textContent);
+      if (newDesc) {
+        const p = article?.querySelector('p');
+        if (p) p.textContent = newDesc;
+        showNotification('이벤트 혜택 설명이 업데이트되었습니다.');
+      }
+
+      // 혜택 이미지 업로드
+      const imageUrl = prompt('혜택 이미지 URL을 입력하세요 (선택사항):');
+      if (imageUrl) {
+        const imageContainer = article?.querySelector('.event-benefit-image');
+        if (imageContainer) {
+          // 기존 이미지 제거
+          const existingImg = imageContainer.querySelector('img');
+          if (existingImg) {
+            existingImg.remove();
+          }
+
+          // 새 이미지 추가
+          const img = document.createElement('img');
+          img.src = imageUrl;
+          img.alt = newBenefit || '이벤트 혜택 이미지';
+          img.style.width = '100%';
+          img.style.height = '100%';
+          img.style.objectFit = 'cover';
+          imageContainer.appendChild(img);
+          
+          showNotification('혜택 이미지가 업데이트되었습니다.');
+        }
       }
     }
   }
