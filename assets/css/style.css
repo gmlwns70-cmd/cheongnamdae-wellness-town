@@ -404,17 +404,10 @@ button {
 .event-promo-inner {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 30px;
-  align-items: stretch;
-  min-height: 420px;
   padding: 34px;
   border: 1px solid rgba(245, 223, 182, 0.38);
   border-radius: var(--radius);
-  background:
-    linear-gradient(90deg, rgba(15, 41, 29, 0.82), rgba(15, 41, 29, 0.42)),
-    url("../images/hero-wellness.jpg?v=20260713-4") left center / contain no-repeat;
+  background: rgba(15, 41, 29, 0.5);
   box-shadow: 0 24px 70px rgba(15, 41, 29, 0.28);
 }
 
@@ -458,8 +451,14 @@ button {
 
 .event-benefits {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 32px;
+  align-items: center;
+  width: 100%;
+}
+
+.event-benefits-copy {
+  min-width: 0;
 }
 
 .event-benefits article {
@@ -491,10 +490,14 @@ button {
   font-size: 15px;
 }
 
+.event-benefits-image {
+  min-width: 0;
+  width: 100%;
+}
+
 .event-coupon-img {
   display: block;
   width: 100%;
-  margin-top: 16px;
   border-radius: var(--radius);
   object-fit: contain;
 }
