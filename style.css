@@ -404,17 +404,10 @@ button {
 .event-promo-inner {
   width: min(1120px, calc(100% - 32px));
   margin: 0 auto;
-  display: grid;
-  grid-template-columns: 0.85fr 1.15fr;
-  gap: 30px;
-  align-items: stretch;
-  min-height: 420px;
-  padding: 34px;
+  padding: 48px 40px;
   border: 1px solid rgba(245, 223, 182, 0.38);
   border-radius: var(--radius);
-  background:
-    linear-gradient(90deg, rgba(15, 41, 29, 0.82), rgba(15, 41, 29, 0.42)),
-    url("../images/hero-wellness.jpg?v=20260713-4") left center / contain no-repeat;
+  background: rgba(15, 41, 29, 0.82);
   box-shadow: 0 24px 70px rgba(15, 41, 29, 0.28);
 }
 
@@ -458,22 +451,28 @@ button {
 
 .event-benefits {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
 }
 
-.event-benefits article {
-  min-height: 170px;
-  padding: 22px;
+.event-benefits-copy {
+  padding: 36px 40px;
   border: 1px solid rgba(245, 223, 182, 0.3);
   border-radius: var(--radius);
-  background: rgba(251, 247, 237, 0.94);
+  background: rgba(251, 247, 237, 0.96);
   color: var(--ink);
+}
+
+.event-benefits-image {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .event-benefits span {
   color: var(--wood);
-  font-size: 13px;
+  font-size: 15px;
   font-weight: 900;
 }
 
@@ -481,14 +480,22 @@ button {
   display: block;
   margin-top: 18px;
   color: var(--forest);
-  font-size: 20px;
+  font-size: 28px;
   line-height: 1.25;
 }
 
 .event-benefits p {
-  margin: 10px 0 0;
+  margin: 14px 0 0;
   color: var(--muted);
-  font-size: 15px;
+  font-size: 18px;
+}
+
+.event-coupon-img {
+  display: block;
+  width: 100%;
+  max-height: 480px;
+  object-fit: contain;
+  border-radius: calc(var(--radius) - 4px);
 }
 
 .section {
@@ -971,16 +978,12 @@ button {
   }
 
   .intro-layout,
-  .notice-band,
-  .event-promo-inner {
+  .notice-band {
     grid-template-columns: 1fr;
   }
 
   .event-promo-inner {
-    background:
-      linear-gradient(180deg, rgba(15, 41, 29, 0.82), rgba(15, 41, 29, 0.58)),
-      url("../images/hero-wellness.jpg?v=20260713-4") center top / 62% auto no-repeat;
-    padding-top: 240px;
+    padding: 36px 28px;
   }
 
   .program-grid {
@@ -1050,7 +1053,7 @@ button {
 
   .event-promo-inner {
     width: min(100% - 24px, 1120px);
-    padding: 220px 22px 24px;
+    padding: 28px 20px;
   }
 
   .notice-band {
