@@ -480,14 +480,14 @@ button {
   display: block;
   margin-top: 18px;
   color: var(--forest);
-  font-size: 28px;
+  font-size: 36px;
   line-height: 1.25;
 }
 
 .event-benefits p {
   margin: 14px 0 0;
   color: var(--muted);
-  font-size: 18px;
+  font-size: 22px;
 }
 
 .event-coupon-img {
