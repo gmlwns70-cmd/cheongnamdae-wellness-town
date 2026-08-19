@@ -3,16 +3,16 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>예약 관리 | 청남대웰니스타운</title>
-    <meta name="description" content="청남대 웰니스타운 예약 신청과 운영자용 구글시트 예약 현황 관리 흐름을 안내합니다.">
+    <title>예약·상담 안내 | 청남대웰니스타운</title>
+    <meta name="description" content="청남대 웰니스타운의 카카오 기반 예약·상담 흐름을 안내합니다. 개인 예약은 카카오 예약하기, 단체·맞춤 문의는 카카오채널 1:1 상담으로 연결합니다.">
     <meta name="robots" content="index, follow">
     <link rel="canonical" href="https://gmlwns70-cmd.github.io/cheongnamdae-wellness-town/reservation-management.html">
     <meta property="og:type" content="website">
-    <meta property="og:title" content="청남대웰니스타운 예약 관리">
-    <meta property="og:description" content="구글폼으로 예약을 접수하고 구글시트에서 접수, 확인 중, 확정, 방문 완료, 취소 상태를 관리합니다.">
+    <meta property="og:title" content="청남대웰니스타운 예약·상담 안내">
+    <meta property="og:description" content="카카오톡으로 예약·상담하고, 정형상품은 카카오 예약하기에서 날짜와 가격을 확인하세요.">
     <meta property="og:image" content="assets/images/hero-wellness.jpg?v=20260713-4">
     <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="assets/css/style.css?v=20260819-2">
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -23,7 +23,7 @@
           <img src="assets/images/logo.webp" alt="청남대 웰니스타운 로고">
           <span class="brand-copy">
             <span data-brand-name>청남대 웰니스타운</span>
-            <small data-tagline>편백 향이 머무는 힐링 공간</small>
+            <small data-tagline>청남대 인근 숲 휴식과 온열 체험</small>
           </span>
         </a>
         <button class="nav-toggle" type="button" aria-label="메뉴 열기" aria-expanded="false">
@@ -34,152 +34,157 @@
           <a href="index.html#program">프로그램</a>
           <a href="index.html#pricing">요금</a>
           <a href="index.html#gallery">현장 사진</a>
-          <a href="reservation-management.html">예약 관리</a>
+          <a href="reservation-management.html">예약·상담</a>
           <a href="index.html#contact">문의</a>
         </nav>
       </div>
     </header>
 
     <main id="main">
-      <section class="hero" id="top" aria-label="청남대웰니스타운 예약 관리">
+      <section class="hero" id="top" aria-label="청남대웰니스타운 예약 및 상담 안내">
         <div class="hero-inner">
-          <div class="hero-copy">
-            <p class="eyebrow">GOOGLE FORM + GOOGLE SHEETS</p>
-            <h1>예약 관리</h1>
-            <p class="lead">고객은 구글폼으로 신청하고, 운영자는 구글시트에서 단계별 예약 현황을 관리합니다.</p>
-            <div class="hero-actions" aria-label="예약 관리 주요 행동">
-              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약 신청하기</a>
-              <a class="button button-secondary" href="tel:01049243435" data-link="phone">전화 문의</a>
-              <a class="button button-secondary" href="index.html#contact">운영 정보 보기</a>
+          <div class="hero-copy reservation-hero-copy">
+            <p class="eyebrow">KAKAO RESERVATION & CONSULTATION</p>
+            <h1>카카오톡으로 예약·상담을 도와드립니다</h1>
+            <p class="lead">개인·가족 정형상품은 카카오 예약하기로, 단체·기관·맞춤 문의는 카카오채널 1:1 상담으로 빠르게 연결합니다.</p>
+            <p class="reservation-action-note" data-assistance-note>카카오톡이 어려우시면 전화로 예약을 도와드립니다.</p>
+            <div class="reservation-action-grid" aria-label="예약 및 상담 주요 행동">
+              <div class="reservation-action-card" data-action-group-item>
+                <h2>가장 빠른 시작</h2>
+                <p>직원에게 바로 예약을 부탁하거나 상담을 시작하세요.</p>
+                <a class="button button-primary" href="#pending-info" data-link="kakaoChannelChat" data-analytics-event="reservation_kakao_chat_click" data-analytics-location="reservation-page">카카오톡으로 예약·상담</a>
+              </div>
+              <div class="reservation-action-card" data-action-group-item>
+                <h2>개인·가족 정형상품</h2>
+                <p>예약 가능한 날짜와 가격을 보고 직접 예약할 수 있는 경로입니다.</p>
+                <a class="button button-light" href="#pending-info" data-link="kakaoBooking" data-analytics-event="reservation_kakao_booking_click" data-analytics-location="reservation-page">예약 가능한 날짜·가격 보기</a>
+              </div>
+              <div class="reservation-action-card" data-action-group-item>
+                <h2>단체·기관 문의</h2>
+                <p>파크골프, 기업, 공공기관, 여행사 일정은 상담으로 조건을 먼저 확인합니다.</p>
+                <a class="button button-light" href="#pending-info" data-link="kakaoGroupInquiry" data-analytics-event="reservation_group_inquiry_click" data-analytics-location="reservation-page">단체·기관 예약 문의</a>
+              </div>
+              <div class="reservation-action-card" data-action-group-item>
+                <h2>전화 도움</h2>
+                <p>카카오톡 사용이 어려우시면 전화로 예약 절차를 안내해 드립니다.</p>
+                <a class="button button-secondary-dark" href="#pending-info" data-link="phone" data-analytics-event="reservation_phone_click" data-analytics-location="reservation-page">전화로 예약 도움받기</a>
+              </div>
             </div>
-            <p class="hero-note">신청자 개인정보가 포함되므로 예약 현황표는 공개 페이지에 표시하지 않습니다.</p>
+            <div class="config-alert" data-config-alert hidden></div>
           </div>
         </div>
       </section>
 
-      <section class="section" aria-labelledby="customer-flow-title">
+      <section class="section" aria-labelledby="pathways-title">
         <div class="container">
-          <p class="section-kicker" data-reveal>CUSTOMER FLOW</p>
-          <h2 id="customer-flow-title" class="section-title" data-reveal>고객 예약 신청 흐름</h2>
-          <p class="section-lead" data-reveal>홈페이지는 예약 신청으로 연결하고, 실제 신청 내용은 구글폼 응답 시트에 자동 저장됩니다.</p>
-          <div class="flow">
+          <p class="section-kicker" data-reveal>RESERVATION PATHS</p>
+          <h2 id="pathways-title" class="section-title" data-reveal>고객 유형에 맞춘 두 가지 예약 경로</h2>
+          <p class="section-lead" data-reveal>긴 입력폼 대신 고객이 한 번의 선택으로 직원 도움 또는 직접 예약으로 이동할 수 있게 구성합니다.</p>
+          <div class="program-grid reservation-path-grid">
+            <article class="program-item" data-reveal>
+              <span>PATH A</span>
+              <h3>개인·가족 정형상품</h3>
+              <p>홈페이지 → 카카오 예약하기 → 날짜·인원·상품 선택 → 예약 확정</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>PATH B</span>
+              <h3>고령층·단체·기업·맞춤상품</h3>
+              <p>홈페이지 → 카카오채널 1:1 상담 → 직원 확인 → 전화·견적·예약 확정</p>
+            </article>
+            <article class="program-item" data-reveal>
+              <span>PHONE</span>
+              <h3>카카오톡이 어려운 고객</h3>
+              <p>전화 연결 후 직원이 일정, 인원, 준비물, 이동 경로까지 차근차근 도와드립니다.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="section section-alt" aria-labelledby="flow-title">
+        <div class="container">
+          <p class="section-kicker" data-reveal>FLOW</p>
+          <h2 id="flow-title" class="section-title" data-reveal>직원 도움 예약을 우선하는 안내 흐름</h2>
+          <div class="flow reservation-flow-grid">
             <article class="flow-step" data-reveal>
               <b>STEP 1</b>
-              <h3>예약폼 작성</h3>
-              <p>이름, 연락처, 희망 날짜, 시간대, 인원, 요청사항을 입력합니다.</p>
+              <h3>카카오톡 또는 전화 선택</h3>
+              <p>고객은 카카오채널 1:1 상담이나 대표전화 중 편한 방법을 고릅니다.</p>
             </article>
             <article class="flow-step" data-reveal>
               <b>STEP 2</b>
-              <h3>시트 자동 저장</h3>
-              <p>구글폼 응답이 구글시트의 예약 신청 목록에 쌓입니다.</p>
+              <h3>직원이 조건 확인</h3>
+              <p>날짜, 인원, 상품, 이동수단, 단체 여부를 간단히 확인합니다.</p>
             </article>
             <article class="flow-step" data-reveal>
               <b>STEP 3</b>
-              <h3>운영자 확인</h3>
-              <p>운영자가 일정과 인원을 확인한 뒤 상태를 변경합니다.</p>
+              <h3>예약 확정 또는 견적 안내</h3>
+              <p>정형상품은 카카오 예약하기로, 맞춤 일정은 전화·견적으로 최종 확정합니다.</p>
             </article>
             <article class="flow-step" data-reveal>
               <b>STEP 4</b>
-              <h3>고객 안내</h3>
-              <p>전화 또는 문자로 확정, 변경, 취소 안내를 진행합니다.</p>
+              <h3>방문 전 안내</h3>
+              <p>오시는 길, 준비물, 운영시간, 현장 안내를 다시 전달합니다.</p>
             </article>
           </div>
         </div>
       </section>
 
-      <section class="section section-alt" aria-labelledby="status-title">
+      <section class="section" aria-labelledby="roles-title">
         <div class="container">
-          <p class="section-kicker" data-reveal>STATUS BOARD</p>
-          <h2 id="status-title" class="section-title" data-reveal>단계별 예약 상태</h2>
-          <p class="section-lead" data-reveal>구글시트의 상태 칸에서 아래 단계 중 하나를 선택해 관리합니다.</p>
-          <div class="program-grid">
-            <article class="program-item" data-reveal>
-              <span>01</span>
-              <h3>접수</h3>
-              <p>고객이 구글폼을 제출한 직후의 기본 상태입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>02</span>
-              <h3>확인 중</h3>
-              <p>운영자가 날짜, 시간대, 인원 가능 여부를 확인하는 단계입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>03</span>
-              <h3>예약 확정</h3>
-              <p>고객에게 확정 안내를 완료한 예약입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>04</span>
-              <h3>변경 요청</h3>
-              <p>시간, 인원, 날짜 조정이 필요한 예약입니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>05</span>
-              <h3>방문 완료</h3>
-              <p>고객 방문이 끝난 뒤 후기 안내나 재방문 안내에 활용합니다.</p>
-            </article>
-            <article class="program-item" data-reveal>
-              <span>06</span>
-              <h3>취소</h3>
-              <p>취소 사유와 안내 완료 여부를 메모로 남깁니다.</p>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section class="section" aria-labelledby="sheet-title">
-        <div class="container">
-          <p class="section-kicker" data-reveal>OPERATOR SHEET</p>
-          <h2 id="sheet-title" class="section-title" data-reveal>운영자용 구글시트 구성</h2>
-          <p class="section-lead" data-reveal>구글폼 응답 시트 옆에 관리용 칼럼을 추가해 실시간으로 예약 현황을 봅니다.</p>
+          <p class="section-kicker" data-reveal>CHANNEL ROLES</p>
+          <h2 id="roles-title" class="section-title" data-reveal>홈페이지와 카카오 채널의 역할</h2>
           <div class="info-grid">
             <article class="info-item" data-reveal>
-              <h3>필수 입력 항목</h3>
-              <p>신청일시, 고객명, 연락처, 희망일, 시간대, 인원, 요청사항</p>
+              <h3>홈페이지</h3>
+              <p>고객이 예약·상담 경로를 한눈에 선택하고 전화 대안을 쉽게 찾는 첫 화면입니다.</p>
             </article>
             <article class="info-item" data-reveal>
-              <h3>운영자 관리 항목</h3>
-              <p>예약상태, 담당자, 확인일시, 안내방법, 최종확정일시, 운영메모</p>
+              <h3>카카오채널</h3>
+              <p>직원과의 1:1 상담, 직원 도움 예약, 단체 문의를 받는 고객 접점입니다.</p>
             </article>
             <article class="info-item" data-reveal>
-              <h3>일정 중복 확인</h3>
-              <p>희망일과 시간대 기준으로 같은 시간 예약을 필터링해 확인합니다.</p>
+              <h3>카카오 예약하기</h3>
+              <p>개인·가족 정형상품의 날짜, 가격, 상품 목록을 보여 주는 기준 예약 원장입니다.</p>
             </article>
             <article class="info-item" data-reveal>
-              <h3>개인정보 주의</h3>
-              <p>구글시트 공유 권한은 운영자만 볼 수 있게 제한하세요. 운영 전 최종 검토 필요.</p>
+              <h3>전화 연결</h3>
+              <p>고령 고객과 카카오톡 사용이 어려운 고객을 위한 필수 대체 경로입니다.</p>
             </article>
           </div>
-          <div class="notice-band" data-reveal>
+          <div class="notice-band reservation-notice-band" data-reveal>
             <div>
-              <h2>구글폼 응답 시트를 예약 현황판으로 사용하세요.</h2>
-              <p>응답 탭은 원본으로 유지하고, 관리 탭에서 상태와 메모를 운영자가 업데이트하는 방식이 안전합니다.</p>
+              <h2>청남대 관광권역의 민간 운영 웰니스 체험시설입니다.</h2>
+              <p data-operator-notice>청남대 관광권역에 위치한 민간 운영 웰니스 체험시설입니다.</p>
             </div>
             <div class="cta-row">
-              <a class="button button-primary" href="https://forms.gle/XAQvZZRyChFnyE5C9" data-link="booking">예약폼 열기</a>
-              <a class="button button-light" href="sms:01049243435" data-link="sms">문자 안내</a>
+              <a class="button button-light" href="#pending-info" data-link="kakaoChannel" aria-label="카카오채널 홈 보기">카카오채널 보기</a>
+              <a class="button button-light" href="#pending-info" data-link="kakaoMap" aria-label="카카오맵에서 위치 보기">카카오맵 길찾기</a>
             </div>
           </div>
         </div>
       </section>
     </main>
 
-    <footer class="footer">
+    <footer class="footer" id="pending-info">
       <div class="footer-inner">
         <div>
           <strong data-company-name>청남대 웰니스타운</strong>
-          <p>예약 현황표에는 개인정보가 포함되므로 공개 홈페이지에 표시하지 않습니다.</p>
+          <p>대표자: <span data-owner>조동우</span> · 사업자등록번호: <span data-business-number>233-88-01155</span></p>
           <p>전화: <span data-phone-text>010-4924-3435</span></p>
+          <p>주소: <span data-address>충청북도 청주시 상당구 문의면 미천리 638-1</span></p>
         </div>
         <div class="footer-links" aria-label="외부 링크">
           <a href="index.html">홈</a>
           <a href="index.html#contact">문의</a>
+          <a href="#pending-info" data-link="kakaoChannel">카카오채널</a>
+          <a href="#pending-info" data-link="kakaoBooking">카카오 예약하기</a>
+          <a href="#pending-info" data-link="phone">전화 연결</a>
           <a href="privacy.html">개인정보 처리방침</a>
         </div>
       </div>
     </footer>
 
-    <script src="assets/js/config.js?v=20260715-5"></script>
-    <script src="assets/js/script.js?v=20260715-5"></script>
+    <script src="assets/js/config.js?v=20260819-2"></script>
+    <script src="assets/js/script.js?v=20260819-2"></script>
   </body>
 </html>

@@ -131,13 +131,20 @@
 
       // ===== 외부 링크 관리 =====
       'booking-url': () => {
-        const newUrl = prompt('새로운 예약폼 URL을 입력하세요:', 'https://forms.gle/XAQvZZRyChFnyE5C9');
-        if (newUrl) {
-          document.querySelectorAll('a[data-link="booking"]').forEach(el => {
-            el.href = newUrl;
+        const newChatUrl = prompt('카카오채널 상담 URL을 입력하세요:', 'http://pf.kakao.com/_eWZSX/chat');
+        if (newChatUrl) {
+          document.querySelectorAll('a[data-link="kakaoChannelChat"]').forEach(el => {
+            el.href = newChatUrl;
           });
-          showNotification('예약폼 URL이 업데이트되었습니다.');
         }
+        const newBookingUrl = prompt('카카오 예약하기 URL을 입력하세요 (없으면 비워 두세요):', '');
+        if (newBookingUrl) {
+          document.querySelectorAll('a[data-link="kakaoBooking"]').forEach(el => {
+            el.href = newBookingUrl;
+            el.hidden = false;
+          });
+        }
+        showNotification('카카오 예약 링크가 업데이트되었습니다.');
       },
       'social-links': () => {
         showSocialLinksModal();
