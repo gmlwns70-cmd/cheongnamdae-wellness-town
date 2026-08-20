@@ -39,39 +39,18 @@
     if (!el) return;
     const programs = window.siteContent.programs || [];
     el.innerHTML = programs
-      .map((p, i) => {
-        const panelId = `program-panel-${p.id || i}`;
-        const featureItems = (p.features || []).map((f) => `<li>${esc(f)}</li>`).join("");
-        const prepItems = (p.prep || []).map((f) => `<li>${esc(f)}</li>`).join("");
-        const galleryImgs = (p.gallery || [])
-          .map((src) => `<img src="${esc(src)}" alt="${esc(p.name)} 관련 사진" loading="lazy">`)
-          .join("");
-        return `
-      <article class="program-card${p.isTodo ? " program-card-todo" : ""}">
-        <button class="program-card-header" type="button" aria-expanded="false" aria-controls="${panelId}">
-          <img class="program-card-thumb" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">
-          <span class="program-card-heading">
-            <span class="program-card-badge">${esc(p.badge)}</span>
-            <span class="program-card-name">${esc(p.name)}</span>
-            <span class="program-card-summary">${esc(p.summary)}</span>
-          </span>
-          <span class="program-card-toggle" aria-hidden="true">자세히 보기 <i>▾</i></span>
-        </button>
-        <div class="program-card-panel" id="${panelId}" hidden>
-          ${p.isTodo ? `<!-- TODO: ${esc(p.note)} -->\n          <p class="program-todo-note">⚠️ ${esc(p.note)}</p>` : ""}
-          <dl class="program-card-meta">
-            <div><dt>소요시간</dt><dd>${esc(p.duration)}</dd></div>
-            <div><dt>가격</dt><dd>${esc(p.price)}</dd></div>
-            <div><dt>추천 대상</dt><dd>${esc(p.target)}</dd></div>
-          </dl>
-          <h4>체험 내용</h4>
-          <ul class="program-card-list">${featureItems}</ul>
-          <h4>준비물</h4>
-          <ul class="program-card-list">${prepItems}</ul>
-          <div class="program-card-gallery">${galleryImgs}</div>
-        </div>
-      </article>`;
-      })
+      .map(
+        (p, i) => `
+      <button type="button" class="program-tile${p.isTodo ? " program-tile-todo" : ""}" data-program-open="${i}" aria-label="${esc(p.name)} 자세히 보기">
+        <img class="program-tile-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">
+        <span class="program-tile-overlay" aria-hidden="true"></span>
+        <span class="program-tile-badge">${esc(p.badge)}</span>
+        <span class="program-tile-body">
+          <span class="program-tile-name">${esc(p.name)}</span>
+          <span class="program-tile-summary">${esc(p.summary)}</span>
+        </span>
+      </button>`
+      )
       .join("");
   }
 
