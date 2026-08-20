@@ -12,7 +12,6 @@
       "'": "&#39;"
     }[ch]));
 
-  const won = (n) => `${Number(n || 0).toLocaleString("ko-KR")}원`;
   const normalizePhone = (value) => (value || "").replace(/[^\d+]/g, "");
 
   function renderHero() {
@@ -33,44 +32,6 @@
           <a class="hero-btn hero-btn-outline" href="#programs" data-scroll="programs">🌿 체험 프로그램 보기</a>
         </div>
       </div>`;
-  }
-
-  function renderEvent() {
-    const el = document.getElementById("event-banner");
-    if (!el) return;
-    const c = window.siteContent.event;
-    if (!c || (!c.title && !c.benefit)) {
-      el.innerHTML = "";
-      el.hidden = true;
-      return;
-    }
-    el.hidden = false;
-    el.innerHTML = `
-      <div class="event-banner-inner">
-        <div class="event-banner-copy">
-          <strong>${esc(c.title)}</strong>
-          <p>${esc(c.benefit)}${c.period ? ` <span class="event-banner-period">(${esc(c.period)}까지)</span>` : ""}</p>
-        </div>
-        ${c.image ? `<img class="event-banner-img" src="${esc(c.image)}" alt="이벤트 안내 이미지">` : ""}
-      </div>`;
-  }
-
-  function renderSummary() {
-    const el = document.getElementById("summary-cards");
-    if (!el) return;
-    const cards = window.siteContent.summaryCards || [];
-    el.innerHTML = cards
-      .map(
-        (card) => `
-      <article class="summary-card">
-        <img src="${esc(card.image)}" alt="${esc(card.title)}" loading="lazy">
-        <div class="summary-card-body">
-          <h3>${esc(card.title)}</h3>
-          <p>${esc(card.desc)}</p>
-        </div>
-      </article>`
-      )
-      .join("");
   }
 
   function renderPrograms() {
@@ -112,34 +73,6 @@
       </article>`;
       })
       .join("");
-  }
-
-  function renderPricing() {
-    const el = document.getElementById("pricing-cards");
-    const tagsEl = document.getElementById("pricing-tags");
-    if (!el) return;
-    const c = window.siteContent.pricing;
-    el.innerHTML = c.basePlans
-      .map(
-        (plan) => `
-      <article class="price-card">
-        <h3>${esc(plan.label)}</h3>
-        <p class="price-amount">${won(plan.price)}</p>
-      </article>`
-      )
-      .join("");
-
-    if (tagsEl) {
-      const tags = [
-        `추가 1인 ${won(c.extraPersonPrice)}`,
-        ...c.rentals.map((r) => `${r.name} ${won(r.price)}`),
-        ...c.treats.map((t) => `${t.name} ${won(t.price)}`)
-      ];
-      tagsEl.innerHTML = tags.map((t) => `<span class="price-tag">${esc(t)}</span>`).join("");
-    }
-
-    const noteEl = document.getElementById("pricing-deposit-note");
-    if (noteEl) noteEl.textContent = c.depositNote;
   }
 
   function renderGallery() {
@@ -235,10 +168,7 @@
   function renderAll() {
     renderMeta();
     renderHero();
-    renderEvent();
-    renderSummary();
     renderPrograms();
-    renderPricing();
     renderGallery();
     renderVisitInfo();
     renderFooter();
