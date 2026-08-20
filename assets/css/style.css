@@ -1275,100 +1275,180 @@ button {
   line-height: 1.6;
 }
 
-/* ---- 체험 프로그램 카드 (아코디언) ---- */
+/* ---- 체험 프로그램 카드 (넷플릭스 스타일 정방형 타일) ---- */
 .program-cards {
   display: grid;
-  gap: 18px;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
   margin-top: 40px;
 }
 
-.program-card {
-  border-radius: var(--radius);
-  background: var(--white);
-  border: 1px solid var(--line);
-  box-shadow: 0 12px 30px rgba(24, 61, 43, 0.08);
-  overflow: hidden;
+@media (min-width: 700px) {
+  .program-cards {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
 }
 
-.program-card-todo {
-  border-style: dashed;
-  background: rgba(255, 255, 255, 0.7);
-}
-
-.program-card-header {
+.program-tile {
+  position: relative;
+  display: block;
   width: 100%;
-  display: grid;
-  grid-template-columns: 96px 1fr auto;
-  align-items: center;
-  gap: 18px;
-  padding: 18px;
-  background: none;
+  aspect-ratio: 1 / 1;
+  padding: 0;
   border: 0;
+  border-radius: var(--radius);
+  overflow: hidden;
   cursor: pointer;
-  text-align: left;
-  color: inherit;
+  box-shadow: 0 12px 30px rgba(24, 61, 43, 0.16);
+  transition: transform 220ms ease, box-shadow 220ms ease;
 }
 
-.program-card-thumb {
-  width: 96px;
-  height: 96px;
-  border-radius: var(--radius);
+.program-tile:hover,
+.program-tile:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 40px rgba(24, 61, 43, 0.26);
+}
+
+.program-tile-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
   object-fit: cover;
 }
 
-.program-card-heading {
-  display: grid;
-  gap: 6px;
+.program-tile-todo .program-tile-img {
+  filter: grayscale(35%);
+  opacity: 0.85;
 }
 
-.program-card-badge {
-  justify-self: start;
+.program-tile-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(15, 41, 29, 0) 38%, rgba(15, 41, 29, 0.9) 100%);
+}
+
+.program-tile-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
   padding: 4px 10px;
   border-radius: 999px;
-  background: rgba(217, 184, 131, 0.28);
-  color: var(--wood);
-  font-size: 13px;
-  font-weight: 800;
-}
-
-.program-card-name {
+  background: rgba(217, 184, 131, 0.92);
   color: var(--forest-deep);
-  font-size: 22px;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.program-tile-todo .program-tile-badge {
+  background: rgba(251, 247, 237, 0.92);
+  color: var(--wood);
+}
+
+.program-tile-body {
+  position: absolute;
+  left: 12px;
+  right: 12px;
+  bottom: 12px;
+  text-align: left;
+  color: var(--white);
+}
+
+.program-tile-name {
+  display: block;
+  font-size: clamp(16px, 2.4vw, 20px);
   font-weight: 800;
+  line-height: 1.25;
 }
 
-.program-card-summary {
-  color: var(--muted);
-  font-size: 16px;
+.program-tile-summary {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  margin-top: 4px;
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.88);
+  line-height: 1.4;
 }
 
-.program-card-toggle {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  color: var(--forest);
-  font-weight: 800;
-  font-size: 16px;
-  white-space: nowrap;
-}
-
-.program-card-toggle i {
-  font-style: normal;
-  transition: transform 220ms ease;
-}
-
-.program-card[class*="is-open"] .program-card-toggle i,
-.program-card.is-open .program-card-toggle i {
-  transform: rotate(180deg);
-}
-
-.program-card-panel {
-  padding: 0 20px 26px;
-  border-top: 1px solid var(--line);
-}
-
-.program-card-panel[hidden] {
+/* ---- 체험 프로그램 상세 모달 ---- */
+.program-modal[hidden] {
   display: none;
+}
+
+.program-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  display: grid;
+  place-items: center;
+  padding: 16px;
+}
+
+.program-modal-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(15, 41, 29, 0.72);
+}
+
+.program-modal-panel {
+  position: relative;
+  z-index: 1;
+  width: min(720px, 100%);
+  max-height: 90vh;
+  overflow-y: auto;
+  background: var(--paper);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.program-modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 0;
+  background: rgba(255, 255, 255, 0.85);
+  color: var(--forest);
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.program-modal-cover {
+  display: block;
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.program-modal-content {
+  padding: 24px;
+}
+
+.program-modal-badge {
+  position: static;
+  display: inline-block;
+}
+
+.program-modal-name {
+  margin: 12px 0 8px;
+  color: var(--forest-deep);
+  font-size: clamp(24px, 4vw, 30px);
+}
+
+.program-modal-summary {
+  margin: 0;
+  color: var(--muted);
+  font-size: 17px;
+}
+
+body.program-modal-open {
+  overflow: hidden;
 }
 
 .program-todo-note {
@@ -1405,7 +1485,7 @@ button {
   font-weight: 700;
 }
 
-.program-card-panel h4 {
+.program-modal-content h4 {
   margin: 22px 0 8px;
   color: var(--forest);
   font-size: 17px;
@@ -1946,34 +2026,9 @@ body.admin-editor-open {
     grid-template-columns: 1fr;
   }
 
-  .program-card-header {
-    grid-template-columns: 72px 1fr;
-  }
-
-  .program-card-toggle {
-    grid-column: 1 / -1;
-    justify-content: flex-end;
-  }
-
   .program-card-meta {
     grid-template-columns: 1fr;
   }
 
   .event-banner-inner {
-    grid-template-columns: 1fr;
-    text-align: center;
-    justify-items: center;
-  }
-
-  .hero-btn {
-    flex: 1 1 100%;
-  }
-
-  .admin-field-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .admin-row {
-    grid-template-columns: 1fr;
-  }
-}
+    grid-template-columns:
