@@ -114,7 +114,8 @@ window.siteContent = {
       image: "assets/images/gallery-new-view.webp",
       features: ["TODO: 체험 상세 내용을 입력해 주세요."],
       prep: ["TODO: 준비물을 입력해 주세요."],
-      gallery: ["assets/images/gallery-new-view.webp", "assets/images/gallery-new-sign.webp"],
+      /* TODO: 임시 사진입니다. 실제 산삼캐기 체험 사진으로 교체해 주세요. */
+      gallery: ["assets/images/gallery-new-view.webp"],
       /* TODO: 산삼캐기 체험 상세 내용, 가격, 인원제한 입력 */
       note: "TODO: 산삼캐기 체험 상세 내용, 가격, 인원제한 입력"
     },
@@ -127,10 +128,11 @@ window.siteContent = {
       duration: "TODO: 소요시간 입력",
       price: "TODO: 가격 입력",
       target: "TODO: 인원제한 입력",
-      image: "assets/images/gallery-new-promo.webp",
+      /* TODO: 임시 사진입니다. 실제 산삼주 담그기 체험 사진으로 교체해 주세요. */
+      image: "assets/images/gallery-new-view.webp",
       features: ["TODO: 체험 상세 내용을 입력해 주세요."],
       prep: ["TODO: 준비물을 입력해 주세요."],
-      gallery: ["assets/images/gallery-new-promo.webp"],
+      gallery: ["assets/images/gallery-new-view.webp"],
       /* TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력 */
       note: "TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력"
     }
