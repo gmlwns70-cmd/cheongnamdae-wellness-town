@@ -71,31 +71,6 @@
       .join("");
   }
 
-  function renderVisitInfo() {
-    const el = document.getElementById("visit-info-cards");
-    if (!el) return;
-    const v = window.siteContent.visitInfo;
-    const partsHtml = v.parts.map((p) => `<li><strong>${esc(p.name)}</strong><span>${esc(p.time)}</span></li>`).join("");
-    el.innerHTML = `
-      <article class="info-card">
-        <h3>📍 오시는 길</h3>
-        <p>${esc(v.address)}</p>
-        <div class="info-card-links">
-          <a class="info-card-link" href="${esc(v.naverMapUrl)}" target="_blank" rel="noopener noreferrer">네이버지도</a>
-          <a class="info-card-link" href="${esc(v.kakaoMapUrl)}" target="_blank" rel="noopener noreferrer">카카오맵</a>
-        </div>
-      </article>
-      <article class="info-card">
-        <h3>⏰ 운영시간</h3>
-        <p>${esc(v.hours)}</p>
-        <p class="info-card-sub">${esc(v.parking)}</p>
-      </article>
-      <article class="info-card">
-        <h3>🎫 4부제 예약 시간</h3>
-        <ul class="info-card-parts">${partsHtml}</ul>
-      </article>`;
-  }
-
   function renderFooter() {
     const c = window.siteContent;
     const kakaoUrl = c.links.kakaoChannel || "#kakao-channel-url";
@@ -149,7 +124,6 @@
     renderHero();
     renderPrograms();
     renderGallery();
-    renderVisitInfo();
     renderFooter();
     document.dispatchEvent(new CustomEvent("site:rendered"));
   }
