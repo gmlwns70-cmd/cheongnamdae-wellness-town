@@ -1,360 +1,338 @@
-// 관리자 메뉴 기능
-(function() {
-  const adminToggle = document.querySelector('.admin-toggle');
-  const adminMenu = document.getElementById('adminMenu');
-  const adminClose = document.querySelector('.admin-close');
-  const adminLinks = document.querySelectorAll('.admin-link');
+/*
+  관리자 편집기 (⚙️ 아이콘)
+  - 별도 로그인 없이, ⚙️ 아이콘을 아는 관리자만 접근합니다.
+  - 입력값을 바꾸면 siteContent 객체가 즉시 바뀌고, renderAll()로 미리보기에 바로 반영됩니다.
+  - "변경사항 다운로드" 버튼을 누르면 site-content-YYYYMMDD.json 파일이 저장됩니다.
+  - 그 JSON 파일을 클로드코드에 붙여넣고 "이 내용으로 사이트에 반영해줘"라고 요청하면
+    assets/js/site-content.js 파일이 실제로 수정되어 사이트에 영구 반영됩니다.
+*/
+(function () {
+  const getPath = (obj, path) =>
+    path.split(".").reduce((o, k) => (o == null ? o : o[k]), obj);
 
-  if (adminToggle && adminMenu) {
-    // 메뉴 열기
-    adminToggle.addEventListener('click', () => {
-      adminMenu.classList.add('is-open');
-      adminToggle.setAttribute('aria-expanded', 'true');
-    });
+  const setPath = (obj, path, value) => {
+    const keys = path.split(".");
+    const last = keys.pop();
+    const target = keys.reduce((o, k) => o[k], obj);
+    target[last] = value;
+  };
 
-    // 메뉴 닫기
-    adminClose.addEventListener('click', () => {
-      adminMenu.classList.remove('is-open');
-      adminToggle.setAttribute('aria-expanded', 'false');
-    });
+  const escAttr = (value) => String(value ?? "").replace(/"/g, "&quot;");
+  const escHtml = (value) => String(value ?? "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 
-    // 링크 클릭 시 기본 동작 처리
-    adminLinks.forEach(link => {
-      link.addEventListener('click', (e) => {
-        e.preventDefault();
-        const editType = link.dataset.edit;
-        handleAdminEdit(editType);
-      });
-    });
-
-    // 외부 클릭 시 메뉴 닫기
-    document.addEventListener('click', (e) => {
-      if (!adminMenu.contains(e.target) && !adminToggle.contains(e.target)) {
-        adminMenu.classList.remove('is-open');
-        adminToggle.setAttribute('aria-expanded', 'false');
-      }
-    });
+  function field(label, path, opts = {}) {
+    const value = getPath(window.siteContent, path);
+    if (opts.textarea) {
+      const text = Array.isArray(value) ? value.join("\n") : value ?? "";
+      return `<label class="admin-field">
+        <span>${label}</span>
+        <textarea data-path="${path}" data-transform="${opts.transform || ""}" rows="${opts.rows || 3}">${escHtml(text)}</textarea>
+      </label>`;
+    }
+    if (opts.checkbox) {
+      return `<label class="admin-field admin-field-checkbox">
+        <input type="checkbox" data-path="${path}" ${value ? "checked" : ""}>
+        <span>${label}</span>
+      </label>`;
+    }
+    return `<label class="admin-field">
+      <span>${label}</span>
+      <input type="${opts.type || "text"}" data-path="${path}" value="${escAttr(value ?? "")}">
+    </label>`;
   }
 
-  // 관리 기능 핸들러
-  function handleAdminEdit(editType) {
-    const editActions = {
-      // ===== 기본 정보 =====
-      'company-name': () => {
-        const newName = prompt('새로운 회사명을 입력하세요:', '청남대 웰니스타운');
-        if (newName) {
-          document.querySelectorAll('[data-company-name]').forEach(el => {
-            el.textContent = newName;
-          });
-          showNotification('회사명이 업데이트되었습니다.');
-        }
-      },
-      'phone': () => {
-        const newPhone = prompt('새로운 연락처를 입력하세요:', '010-4924-3435');
-        if (newPhone) {
-          document.querySelectorAll('[data-phone-text]').forEach(el => {
-            el.textContent = newPhone;
-          });
-          document.querySelectorAll('a[href^="tel:"]').forEach(el => {
-            el.href = 'tel:' + newPhone.replace(/[^\d+]/g, '');
-          });
-          showNotification('연락처가 업데이트되었습니다.');
-        }
-      },
-      'address': () => {
-        const newAddress = prompt('새로운 주소를 입력하세요:', '충청북도 청주시 상당구 문의면 미천리 638-1');
-        if (newAddress) {
-          document.querySelectorAll('[data-address]').forEach(el => {
-            el.textContent = newAddress;
-          });
-          showNotification('주소가 업데이트되었습니다.');
-        }
-      },
-      'hours': () => {
-        const newHours = prompt('새로운 운영시간을 입력하세요:', '매일 09:00~21:00');
-        if (newHours) {
-          document.querySelectorAll('[data-hours]').forEach(el => {
-            el.textContent = newHours;
-          });
-          showNotification('운영시간이 업데이트되었습니다.');
-        }
-      },
+  function programSection(index) {
+    const p = window.siteContent.programs[index];
+    return `
+      <details class="admin-subsection">
+        <summary>${index + 1}. ${escHtml(p.name)}${p.isTodo ? " (준비중)" : ""}</summary>
+        <div class="admin-field-grid">
+          ${field("프로그램명", `programs.${index}.name`)}
+          ${field("배지 (예: 대표 체험, 신규)", `programs.${index}.badge`)}
+          ${field("한 줄 요약", `programs.${index}.summary`)}
+          ${field("소요시간", `programs.${index}.duration`)}
+          ${field("가격 안내 문구", `programs.${index}.price`)}
+          ${field("추천 대상", `programs.${index}.target`)}
+          ${field("대표 이미지 파일명 (assets/images/...)", `programs.${index}.image`)}
+        </div>
+        ${field("체험 내용 (줄바꿈으로 구분)", `programs.${index}.features`, { textarea: true, transform: "lines", rows: 4 })}
+        ${field("준비물 (줄바꿈으로 구분)", `programs.${index}.prep`, { textarea: true, transform: "lines", rows: 2 })}
+        ${field("체험 갤러리 이미지 파일명 (줄바꿈으로 구분)", `programs.${index}.gallery`, { textarea: true, transform: "lines", rows: 2 })}
+        ${field("준비중(TODO) 카드로 표시", `programs.${index}.isTodo`, { checkbox: true })}
+        ${field("개발 메모 / TODO 안내 문구", `programs.${index}.note`, { textarea: true, rows: 2 })}
+      </details>`;
+  }
 
-      // ===== 콘텐츠 관리 =====
-      'hero-title': () => {
-        const newTitle = prompt('새로운 제목을 입력하세요:', '청남대 웰니스타운');
-        if (newTitle) {
-          document.querySelectorAll('.hero h1[data-brand-name]').forEach(el => {
-            el.textContent = newTitle;
-          });
-          showNotification('제목이 업데이트되었습니다.');
-        }
-      },
-      'hero-description': () => {
-        const newDesc = prompt('새로운 설명을 입력하세요:', '편백 향과 배럴 찜질을 중심으로 쉬어가는 체험 공간입니다.');
-        if (newDesc) {
-          document.querySelectorAll('.hero .lead').forEach(el => {
-            el.textContent = newDesc;
-          });
-          showNotification('설명이 업데이트되었습니다.');
-        }
-      },
-      'pricing': () => {
-        showPricingModal();
-      },
-      'programs': () => {
-        showProgramsModal();
-      },
+  const LIST_SECTIONS = {
+    "pricing.rentals": {
+      containerId: "admin-rentals-rows",
+      fields: [
+        { key: "name", label: "대여용품 이름" },
+        { key: "price", label: "가격(원)", type: "number" }
+      ],
+      makeDefault: () => ({ name: "", price: 0 })
+    },
+    "pricing.treats": {
+      containerId: "admin-treats-rows",
+      fields: [
+        { key: "name", label: "즐길거리 이름" },
+        { key: "price", label: "가격(원)", type: "number" }
+      ],
+      makeDefault: () => ({ name: "", price: 0 })
+    },
+    gallery: {
+      containerId: "admin-gallery-rows",
+      fields: [
+        { key: "image", label: "이미지 파일명 (assets/images/...)" },
+        { key: "caption", label: "사진 설명" }
+      ],
+      reorder: true,
+      makeDefault: () => ({ image: "assets/images/", caption: "" })
+    }
+  };
 
-      // ===== 이벤트 관리 =====
-      'event-title': () => {
-        const newTitle = prompt('새로운 이벤트 제목을 입력하세요:', '개업 기념 이벤트');
-        if (newTitle) {
-          document.querySelectorAll('.event-promo h2').forEach(el => {
-            el.textContent = newTitle;
-          });
-          showNotification('이벤트 제목이 업데이트되었습니다.');
-        }
-      },
-      'event-period': () => {
-        const newPeriod = prompt('새로운 이벤트 기간을 입력하세요:', '9월 말까지');
-        if (newPeriod) {
-          document.querySelectorAll('.event-period').forEach(el => {
-            el.textContent = newPeriod;
-          });
-          showNotification('이벤트 기간이 업데이트되었습니다.');
-        }
-      },
-      'event-benefits': () => {
-        showEventBenefitsModal();
-      },
+  function renderRepeatable(listPath) {
+    const cfg = LIST_SECTIONS[listPath];
+    const container = document.getElementById(cfg.containerId);
+    if (!container) return;
+    const list = getPath(window.siteContent, listPath) || [];
+    container.innerHTML =
+      list
+        .map(
+          (item, idx) => `
+      <div class="admin-row" data-list="${listPath}" data-index="${idx}">
+        ${cfg.fields
+          .map(
+            (f) => `
+          <label class="admin-field admin-field-inline">
+            <span>${f.label}</span>
+            <input type="${f.type || "text"}" data-row-field="${f.key}" value="${escAttr(item[f.key] ?? "")}">
+          </label>`
+          )
+          .join("")}
+        <span class="admin-row-actions">
+          ${cfg.reorder ? `<button type="button" data-row-up ${idx === 0 ? "disabled" : ""}>▲</button><button type="button" data-row-down ${idx === list.length - 1 ? "disabled" : ""}>▼</button>` : ""}
+          <button type="button" class="admin-row-remove" data-row-remove>삭제</button>
+        </span>
+      </div>`
+        )
+        .join("") +
+      `<button type="button" class="admin-add-btn" data-add-list="${listPath}">+ 항목 추가</button>`;
+  }
 
-      // ===== 외부 링크 관리 =====
-      'booking-url': () => {
-        const newUrl = prompt('새로운 예약폼 URL을 입력하세요:', 'https://forms.gle/XAQvZZRyChFnyE5C9');
-        if (newUrl) {
-          document.querySelectorAll('a[data-link="booking"]').forEach(el => {
-            el.href = newUrl;
-          });
-          showNotification('예약폼 URL이 업데이트되었습니다.');
-        }
-      },
-      'social-links': () => {
-        showSocialLinksModal();
-      },
-      'map-links': () => {
-        const newMapUrl = prompt('새로운 지도 URL을 입력하세요:');
-        if (newMapUrl) {
-          document.querySelectorAll('a[data-link="directions"]').forEach(el => {
-            el.href = newMapUrl;
-          });
-          showNotification('지도 링크가 업데이트되었습니다.');
-        }
-      },
+  function buildModal() {
+    const modal = document.createElement("div");
+    modal.id = "adminEditor";
+    modal.className = "admin-editor";
+    modal.hidden = true;
+    modal.innerHTML = `
+      <div class="admin-editor-backdrop" data-admin-close></div>
+      <div class="admin-editor-panel" role="dialog" aria-modal="true" aria-label="관리자 편집기">
+        <header class="admin-editor-header">
+          <h2>⚙️ 관리자 편집기</h2>
+          <button type="button" class="admin-editor-close" data-admin-close aria-label="편집기 닫기">×</button>
+        </header>
+        <p class="admin-editor-guide">
+          아래 항목의 값을 바꾸면 뒤 화면에 <strong>바로</strong> 반영됩니다(미리보기).
+          다 수정하셨으면 맨 아래 <strong>"변경사항 다운로드"</strong> 버튼을 눌러 파일을 저장한 뒤,
+          그 파일 내용을 <strong>클로드코드(Claude Code)</strong>에 붙여넣고
+          <strong>"이 내용으로 사이트에 반영해줘"</strong>라고 요청해 주세요. 그러면 실제 사이트에 반영됩니다.
+        </p>
 
-      // ===== 갤러리 관리 =====
-      'gallery-upload': () => {
-        showGalleryUploadModal();
-      },
-      'gallery-order': () => {
-        showGalleryOrderModal();
-      }
+        <div class="admin-editor-body">
+          <details class="admin-section" open>
+            <summary>1. 기본 정보</summary>
+            <div class="admin-field-grid">
+              ${field("회사명", "business.companyName")}
+              ${field("대표자", "business.owner")}
+              ${field("사업자등록번호", "business.businessNumber")}
+              ${field("예약 전화번호", "business.phone")}
+              ${field("문자 상담 번호", "business.smsPhone")}
+              ${field("이메일", "business.email")}
+              ${field("주소", "business.address")}
+              ${field("운영시간", "business.hours")}
+              ${field("주차 안내", "business.parking")}
+            </div>
+          </details>
+
+          <details class="admin-section">
+            <summary>2. 콘텐츠 (히어로 · 이벤트 · 체험 프로그램)</summary>
+            <h4 class="admin-group-title">히어로 영역</h4>
+            <div class="admin-field-grid">
+              ${field("메인 제목", "hero.title")}
+              ${field("운영정보 배지 문구", "hero.badge")}
+            </div>
+            ${field("한 줄 소개", "hero.subtitle", { textarea: true, rows: 2 })}
+
+            <h4 class="admin-group-title">이벤트 배너</h4>
+            <div class="admin-field-grid">
+              ${field("이벤트 제목", "event.title")}
+              ${field("이벤트 기간", "event.period")}
+              ${field("이벤트 이미지 파일명", "event.image")}
+            </div>
+            ${field("이벤트 혜택 설명", "event.benefit", { textarea: true, rows: 2 })}
+
+            <h4 class="admin-group-title">체험 프로그램 4종</h4>
+            ${[0, 1, 2, 3].map(programSection).join("")}
+          </details>
+
+          <details class="admin-section">
+            <summary>3. 요금 정보</summary>
+            <div class="admin-field-grid">
+              ${field("2인 요금(원)", "pricing.basePlans.0.price", { type: "number" })}
+              ${field("3인 요금(원)", "pricing.basePlans.1.price", { type: "number" })}
+              ${field("4인 요금(원)", "pricing.basePlans.2.price", { type: "number" })}
+              ${field("추가 1인 요금(원)", "pricing.extraPersonPrice", { type: "number" })}
+            </div>
+            ${field("예약금 안내 문구", "pricing.depositNote", { textarea: true, rows: 2 })}
+            <h4 class="admin-group-title">대여용품</h4>
+            <div class="admin-list" id="admin-rentals-rows"></div>
+            <h4 class="admin-group-title">즐길거리</h4>
+            <div class="admin-list" id="admin-treats-rows"></div>
+          </details>
+
+          <details class="admin-section">
+            <summary>4. 외부 링크</summary>
+            <div class="admin-field-grid">
+              ${field("카카오채널 URL", "links.kakaoChannel")}
+              ${field("예약폼 URL", "links.bookingForm")}
+              ${field("스마트플레이스 URL", "links.smartPlace")}
+              ${field("스마트스토어 URL", "links.smartStore")}
+              ${field("YouTube URL", "links.youtube")}
+              ${field("Instagram URL", "links.instagram")}
+              ${field("네이버블로그 URL", "links.naverBlog")}
+              ${field("네이버지도 링크", "visitInfo.naverMapUrl")}
+              ${field("카카오맵 링크", "visitInfo.kakaoMapUrl")}
+            </div>
+          </details>
+
+          <details class="admin-section">
+            <summary>5. 대표 사진 갤러리</summary>
+            <p class="admin-section-help">이미 assets/images 폴더에 올려둔 사진의 파일명을 입력하세요. ▲▼ 버튼으로 순서를 바꿀 수 있습니다.</p>
+            <div class="admin-list" id="admin-gallery-rows"></div>
+          </details>
+        </div>
+
+        <footer class="admin-editor-footer">
+          <p class="admin-editor-guide admin-editor-guide-bottom">
+            📥 <strong>변경사항 다운로드</strong>를 누르면 오늘 날짜의 JSON 파일이 저장됩니다.
+            그 파일을 클로드코드 채팅창에 붙여넣고 "이 내용으로 사이트에 반영해줘"라고만 말씀하시면 됩니다.
+          </p>
+          <button type="button" class="admin-download-btn" id="adminDownloadBtn">📥 변경사항 다운로드</button>
+        </footer>
+      </div>`;
+    document.body.appendChild(modal);
+    return modal;
+  }
+
+  function downloadJson() {
+    const now = new Date();
+    const stamp = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, "0")}${String(now.getDate()).padStart(2, "0")}`;
+    const blob = new Blob([JSON.stringify(window.siteContent, null, 2)], { type: "application/json" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `site-content-${stamp}.json`;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    URL.revokeObjectURL(url);
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const modal = buildModal();
+    Object.keys(LIST_SECTIONS).forEach(renderRepeatable);
+
+    const toggle = document.getElementById("adminToggle");
+    const openModal = () => {
+      modal.hidden = false;
+      document.body.classList.add("admin-editor-open");
+    };
+    const closeModal = () => {
+      modal.hidden = true;
+      document.body.classList.remove("admin-editor-open");
     };
 
-    if (editActions[editType]) {
-      editActions[editType]();
-    }
-  }
-
-  // ===== 모달 함수들 =====
-
-  // 요금 수정 모달
-  function showPricingModal() {
-    const priceItems = document.querySelectorAll('.price-list div');
-    let pricingData = {};
-    
-    priceItems.forEach(item => {
-      const dt = item.querySelector('dt')?.textContent;
-      const dd = item.querySelector('dd')?.textContent;
-      if (dt) pricingData[dt] = dd;
+    toggle?.addEventListener("click", openModal);
+    modal.addEventListener("click", (event) => {
+      if (event.target.closest("[data-admin-close]")) closeModal();
+    });
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !modal.hidden) closeModal();
     });
 
-    const itemToEdit = prompt('수정할 항목을 선택하세요 (예: 2인, 3인, 요금명):', '2인');
-    if (itemToEdit) {
-      const newPrice = prompt(`${itemToEdit}의 새로운 가격을 입력하세요:`, pricingData[itemToEdit] || '');
-      if (newPrice) {
-        document.querySelectorAll('.price-list div').forEach(item => {
-          if (item.querySelector('dt')?.textContent === itemToEdit) {
-            const dd = item.querySelector('dd');
-            if (dd) dd.textContent = newPrice;
-          }
-        });
-        showNotification('요금이 업데이트되었습니다.');
-      }
-    }
-  }
-
-  // 프로그램 수정 모달
-  function showProgramsModal() {
-    const programs = document.querySelectorAll('.program-item h3');
-    const programList = Array.from(programs).map((p, i) => `${i+1}. ${p.textContent}`).join('\n');
-    
-    alert(`현재 프로그램:\n${programList}\n\n프로그램 수정을 위해 개발 팀에 문의하세요.`);
-  }
-
-  // 이벤트 혜택 수정 모달
-  function showEventBenefitsModal() {
-    const benefits = document.querySelectorAll('.event-benefits article');
-    const benefitList = Array.from(benefits).map((b, i) => {
-      const strong = b.querySelector('strong')?.textContent;
-      const p = b.querySelector('p')?.textContent;
-      return `${i+1}. ${strong}: ${p}`;
-    }).join('\n\n');
-
-    const benefitIndex = prompt('수정할 혜택 번호를 선택하세요 (1-4):\n\n' + benefitList + '\n\n번호 입력:', '1');
-    if (benefitIndex && benefitIndex >= 1 && benefitIndex <= 4) {
-      const idx = parseInt(benefitIndex) - 1;
-      const article = benefits[idx];
-      
-      // 혜택 제목 수정
-      const newBenefit = prompt('새로운 혜택 제목을 입력하세요:', article?.querySelector('strong')?.textContent);
-      if (newBenefit) {
-        const strong = article?.querySelector('strong');
-        if (strong) strong.textContent = newBenefit;
-        showNotification('이벤트 혜택 제목이 업데이트되었습니다.');
-      }
-
-      // 혜택 설명 수정
-      const newDesc = prompt('새로운 혜택 설명을 입력하세요:', article?.querySelector('p')?.textContent);
-      if (newDesc) {
-        const p = article?.querySelector('p');
-        if (p) p.textContent = newDesc;
-        showNotification('이벤트 혜택 설명이 업데이트되었습니다.');
-      }
-
-      // 혜택 이미지 업로드
-      const imageUrl = prompt('혜택 이미지 URL을 입력하세요 (선택사항):');
-      if (imageUrl) {
-        const imageContainer = article?.querySelector('.event-benefit-image');
-        if (imageContainer) {
-          // 기존 이미지 제거
-          const existingImg = imageContainer.querySelector('img');
-          if (existingImg) {
-            existingImg.remove();
-          }
-
-          // 새 이미지 추가
-          const img = document.createElement('img');
-          img.src = imageUrl;
-          img.alt = newBenefit || '이벤트 혜택 이미지';
-          img.style.width = '100%';
-          img.style.height = '100%';
-          img.style.objectFit = 'cover';
-          imageContainer.appendChild(img);
-          
-          showNotification('혜택 이미지가 업데이트되었습니다.');
+    modal.addEventListener("input", (event) => {
+      const target = event.target;
+      if (target.matches("[data-path]")) {
+        const path = target.getAttribute("data-path");
+        let value = target.value;
+        if (target.type === "checkbox") {
+          value = target.checked;
+        } else if (target.tagName === "TEXTAREA" && target.dataset.transform === "lines") {
+          value = value.split("\n").map((s) => s.trim()).filter(Boolean);
+        } else if (target.type === "number") {
+          value = Number(value) || 0;
         }
+        setPath(window.siteContent, path, value);
+        window.renderAll();
+        return;
       }
-    }
-  }
+      if (target.matches("[data-row-field]")) {
+        const row = target.closest(".admin-row");
+        const listPath = row.dataset.list;
+        const idx = Number(row.dataset.index);
+        const key = target.dataset.rowField;
+        let value = target.value;
+        if (target.type === "number") value = Number(value) || 0;
+        getPath(window.siteContent, listPath)[idx][key] = value;
+        window.renderAll();
+      }
+    });
 
-  // SNS 링크 수정 모달
-  function showSocialLinksModal() {
-    const channels = ['인스타그램', '유튜브', '네이버블로그'];
-    const selectedChannel = prompt(`SNS 채널을 선택하세요:\n1. 인스타그램\n2. 유튜브\n3. 네이버블로그\n\n번호를 입력하세요:`, '1');
-    
-    if (selectedChannel && selectedChannel >= 1 && selectedChannel <= 3) {
-      const idx = parseInt(selectedChannel) - 1;
-      const linkType = ['instagram', 'youtube', 'naverBlog'][idx];
-      const channelName = channels[idx];
-      
-      const newUrl = prompt(`새로운 ${channelName} URL을 입력하세요:`);
-      if (newUrl) {
-        document.querySelectorAll(`a[data-link="${linkType}"]`).forEach(el => {
-          el.href = newUrl;
-        });
-        showNotification(`${channelName} 링크가 업데이트되었습니다.`);
+    modal.addEventListener("change", (event) => {
+      if (event.target.matches('[data-path][type="checkbox"]')) {
+        modal.dispatchEvent(new Event("input", { bubbles: true }));
       }
-    }
-  }
+    });
 
-  // 갤러리 업로드 모달
-  function showGalleryUploadModal() {
-    const imageUrl = prompt('새로운 이미지 URL을 입력하세요:');
-    const imageCaption = prompt('이미지 설명을 입력하세요:', '새로운 사진');
-    
-    if (imageUrl) {
-      const galleryGrid = document.querySelector('.gallery-grid');
-      if (galleryGrid) {
-        const newFigure = document.createElement('figure');
-        newFigure.className = 'gallery-item';
-        newFigure.setAttribute('data-reveal', '');
-        newFigure.innerHTML = `
-          <img src="${imageUrl}" alt="${imageCaption}">
-          <figcaption>${imageCaption}</figcaption>
-        `;
-        galleryGrid.appendChild(newFigure);
-        showNotification('새로운 사진이 갤러리에 추가되었습니다.');
+    modal.addEventListener("click", (event) => {
+      const removeBtn = event.target.closest("[data-row-remove]");
+      if (removeBtn) {
+        const row = removeBtn.closest(".admin-row");
+        const listPath = row.dataset.list;
+        getPath(window.siteContent, listPath).splice(Number(row.dataset.index), 1);
+        renderRepeatable(listPath);
+        window.renderAll();
+        return;
       }
-    }
-  }
 
-  // 갤러리 순서 변경 모달
-  function showGalleryOrderModal() {
-    const galleryItems = document.querySelectorAll('.gallery-item figcaption');
-    const itemList = Array.from(galleryItems).map((item, i) => `${i+1}. ${item.textContent}`).join('\n');
-    
-    alert(`현재 갤러리 항목:\n${itemList}\n\n갤러리 순서 변경은 드래그 기능으로 개발 예정입니다.`);
-  }
+      const upBtn = event.target.closest("[data-row-up]");
+      const downBtn = event.target.closest("[data-row-down]");
+      if (upBtn || downBtn) {
+        const row = (upBtn || downBtn).closest(".admin-row");
+        const listPath = row.dataset.list;
+        const idx = Number(row.dataset.index);
+        const delta = upBtn ? -1 : 1;
+        const list = getPath(window.siteContent, listPath);
+        const swapIdx = idx + delta;
+        if (swapIdx >= 0 && swapIdx < list.length) {
+          [list[idx], list[swapIdx]] = [list[swapIdx], list[idx]];
+          renderRepeatable(listPath);
+          window.renderAll();
+        }
+        return;
+      }
 
-  // 알림 메시지 표시
-  function showNotification(message) {
-    const notification = document.createElement('div');
-    notification.style.cssText = `
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: #183d2b;
-      color: white;
-      padding: 16px 24px;
-      border-radius: 8px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-      font-weight: 600;
-      z-index: 1000;
-      animation: slideInUp 300ms ease both;
-    `;
-    notification.textContent = message;
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-      notification.style.animation = 'slideOutDown 300ms ease both';
-      setTimeout(() => notification.remove(), 300);
-    }, 2500);
-  }
+      const addBtn = event.target.closest("[data-add-list]");
+      if (addBtn) {
+        const listPath = addBtn.getAttribute("data-add-list");
+        const cfg = LIST_SECTIONS[listPath];
+        getPath(window.siteContent, listPath).push(cfg.makeDefault());
+        renderRepeatable(listPath);
+        window.renderAll();
+      }
+    });
 
-  // 애니메이션 스타일 추가
-  const style = document.createElement('style');
-  style.textContent = `
-    @keyframes slideInUp {
-      from {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-    @keyframes slideOutDown {
-      from {
-        opacity: 1;
-        transform: translateY(0);
-      }
-      to {
-        opacity: 0;
-        transform: translateY(20px);
-      }
-    }
-  `;
-  document.head.appendChild(style);
+    document.getElementById("adminDownloadBtn")?.addEventListener("click", downloadJson);
+  });
 })();
