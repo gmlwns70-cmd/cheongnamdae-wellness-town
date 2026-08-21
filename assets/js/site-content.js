@@ -127,12 +127,12 @@ window.siteContent = {
       summary: "직접 산삼주를 담가보는 체험입니다. (상세 내용 준비 중)",
       duration: "TODO: 소요시간 입력",
       price: "TODO: 가격 입력",
-      target: "TODO: 인원제한 입력",
-      /* TODO: 임시 사진입니다. 실제 산삼주 담그기 체험 사진으로 교체해 주세요. */
-      image: "assets/images/gallery-new-view.webp",
+         target: "TODO: 인원제한 입력",
+      /* TODO: 임시 사진입니다. 실제 산삼주 담그기 체험(담금·병입) 사진으로 교체해 주세요. 지금은 "산삼동동주"가 표기된 즐길거리 안내판 사진을 임시로 사용합니다. */
+      image: "assets/images/price-sign.webp",
       features: ["TODO: 체험 상세 내용을 입력해 주세요."],
       prep: ["TODO: 준비물을 입력해 주세요."],
-      gallery: ["assets/images/gallery-new-view.webp"],
+      gallery: ["assets/images/price-sign.webp"],
       /* TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력 */
       note: "TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력"
     }
