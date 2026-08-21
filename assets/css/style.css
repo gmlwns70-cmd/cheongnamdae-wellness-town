@@ -1043,6 +1043,7 @@ button {
   .hero-actions,
   .cta-row {
     display: grid;
+    grid-template-columns: 1fr;
   }
 
   .button {
