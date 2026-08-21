@@ -21,7 +21,6 @@
     const kakaoUrl = c.links.kakaoChannel || "#kakao-channel-url";
     el.innerHTML = `
       <div class="hero-inner">
-        <img class="hero-logo" src="${esc(c.hero.logo)}" alt="${esc(c.hero.title)} 로고">
         <p class="hero-eyebrow">CHEONGNAMDAE WELLNESS TOWN</p>
         <h1 class="hero-title">${esc(c.hero.title)}</h1>
         <p class="hero-subtitle">${esc(c.hero.subtitle)}</p>
@@ -29,7 +28,6 @@
         <div class="hero-actions">
           <a class="hero-btn hero-btn-primary" href="${esc(kakaoUrl)}" data-link="kakaoChannel">💬 카카오채널로 예약하기</a>
           <a class="hero-btn hero-btn-secondary" href="tel:${normalizePhone(c.business.phone)}" data-link="phone">📞 예약 전화</a>
-          <a class="hero-btn hero-btn-outline" href="#programs" data-scroll="programs">🌿 체험 프로그램 보기</a>
         </div>
       </div>`;
   }
@@ -73,15 +71,6 @@
 
   function renderFooter() {
     const c = window.siteContent;
-    const kakaoUrl = c.links.kakaoChannel || "#kakao-channel-url";
-
-    const actionsEl = document.getElementById("footer-actions");
-    if (actionsEl) {
-      actionsEl.innerHTML = `
-        <a class="hero-btn hero-btn-primary" href="${esc(kakaoUrl)}" data-link="kakaoChannel">💬 카카오채널 예약</a>
-        <a class="hero-btn hero-btn-secondary" href="tel:${normalizePhone(c.business.phone)}" data-link="phone">📞 전화 문의</a>
-        <a class="hero-btn hero-btn-outline" href="sms:${normalizePhone(c.business.smsPhone)}" data-link="sms">✉️ 문자 문의</a>`;
-    }
 
     const channelsEl = document.getElementById("footer-channels");
     if (channelsEl) {
