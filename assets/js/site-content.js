@@ -61,9 +61,9 @@ window.siteContent = {
       isTodo: false,
       name: "편백 피톤치드 치유체험",
       summary: "편백 향 가득한 배럴 찜질로 몸과 마음을 쉬어가는 대표 체험입니다.",
-      duration: "자유 이용 (약 1~2시간)",
-      price: "2인 40,000원부터",
-      target: "가족, 지인, 중장년 방문객 누구나",
+      duration: "약 3시간",
+      price: "2인 40,000원, 3인 50,000원, 4인 60,000원, 추가인원 15,000원, 체험 예약시간은 1부(9시~12시), 2부(12시~15시), 3부(15시~18시), 4부(18시~21시)",
+      target: "",
       image: "assets/images/barrel-lounge.webp",
       features: [
         "편백나무 소재의 배럴 찜질 공간에서 온열 휴식",
@@ -83,58 +83,54 @@ window.siteContent = {
       badge: "자연 체험",
       isTodo: false,
       name: "트래킹, 피톤치드 산책로",
-      summary: "대통령 산책로를 따라 걷는 완만한 숲길 힐링 코스입니다.",
-      duration: "약 40분~1시간 코스",
-      price: "체험비에 포함",
+      summary: "트래킹, 산책로를 따라 걷는 완만한 숲길 힐링 코스입니다.",
+      duration: "약 1시간",
+      price: "별도 체험비는 없습니다.",
       target: "걷기 편한 신발 착용을 권장합니다",
-      image: "assets/images/forest-experience.webp",
+      /* TODO: 임시 이미지를 삭제했습니다. 실제 산책로 체험 사진으로 교체해 주세요. */
+      image: "",
       features: [
         "청남대 인근 대통령 산책로를 따라 걷는 숲길 코스",
         "피톤치드 가득한 숲에서 맑은 공기를 마시는 시간",
         "완만한 경사로 남녀노소 편안하게 걸을 수 있는 코스"
       ],
       prep: ["편한 신발", "물, 모자(계절에 따라 준비)"],
-      gallery: [
-        "assets/images/forest-experience.webp",
-        "assets/images/forest-walk.webp",
-        "assets/images/mountain-view.webp",
-        "assets/images/forest-guide.webp"
-      ],
+      gallery: [],
       note: ""
     },
     {
       id: "sansam-dig",
       badge: "신규",
       isTodo: true,
-      name: "산삼캐기 체험",
-      summary: "전문가와 함께하는 산삼캐기 체험입니다. (상세 내용 준비 중)",
+      name: "산양삼 캐기 체험",
+      summary: "농장 대표와 함께하는 산양삼 캐기 체험입니다.",
       duration: "TODO: 소요시간 입력",
-      price: "TODO: 가격 입력",
-      target: "TODO: 인원제한 입력",
-      image: "assets/images/gallery-new-view.webp",
-      features: ["TODO: 체험 상세 내용을 입력해 주세요."],
+      price: "1인 10,000원 / 5~6년근, 2뿌리",
+      target: "",
+      /* TODO: 임시 이미지를 삭제했습니다. 실제 산양삼 캐기 체험 사진으로 교체해 주세요. */
+      image: "",
+      features: [],
       prep: ["TODO: 준비물을 입력해 주세요."],
-      /* TODO: 임시 사진입니다. 실제 산삼캐기 체험 사진으로 교체해 주세요. */
-      gallery: ["assets/images/gallery-new-view.webp"],
-      /* TODO: 산삼캐기 체험 상세 내용, 가격, 인원제한 입력 */
-      note: "TODO: 산삼캐기 체험 상세 내용, 가격, 인원제한 입력"
+      gallery: [],
+      /* TODO: 산양삼 캐기 체험 소요시간, 대표 이미지 입력 */
+      note: "TODO: 산양삼 캐기 체험 소요시간, 대표 이미지 입력"
     },
     {
       id: "sansam-wine",
       badge: "신규",
       isTodo: true,
-      name: "산삼주 담그기 체험",
-      summary: "직접 산삼주를 담가보는 체험입니다. (상세 내용 준비 중)",
+      name: "산양삼주 담그기 체험",
+      summary: "직접 산양삼주를 담가보는 체험입니다.",
       duration: "TODO: 소요시간 입력",
-      price: "TODO: 가격 입력",
-         target: "TODO: 인원제한 입력",
-      /* TODO: 임시 사진입니다. 실제 산삼주 담그기 체험(담금·병입) 사진으로 교체해 주세요. 지금은 "산삼동동주"가 표기된 즐길거리 안내판 사진을 임시로 사용합니다. */
-      image: "assets/images/price-sign.webp",
-      features: ["TODO: 체험 상세 내용을 입력해 주세요."],
-      prep: ["TODO: 준비물을 입력해 주세요."],
-      gallery: ["assets/images/price-sign.webp"],
-      /* TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력 */
-      note: "TODO: 산삼주 담그기 체험 상세 내용, 가격, 인원제한 입력"
+      price: "1인 15,000원/375ml, 1병",
+      target: "",
+      /* TODO: 임시 이미지를 삭제했습니다. 실제 산양삼주 담그기 체험 사진으로 교체해 주세요. */
+      image: "",
+      features: [],
+      prep: [],
+      gallery: [],
+      /* TODO: 산양삼주 담그기 체험 소요시간, 대표 이미지 입력 */
+      note: "TODO: 산양삼주 담그기 체험 소요시간, 대표 이미지 입력"
     }
   ],
 
