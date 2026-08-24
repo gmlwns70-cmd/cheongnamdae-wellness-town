@@ -1301,6 +1301,7 @@ button {
   border-radius: var(--radius);
   overflow: hidden;
   cursor: pointer;
+   background: var(--forest);
   box-shadow: 0 12px 30px rgba(24, 61, 43, 0.16);
   transition: transform 220ms ease, box-shadow 220ms ease;
 }
