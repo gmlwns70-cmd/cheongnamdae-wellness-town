@@ -40,9 +40,8 @@
       .map(
         (p, i) => `
       <button type="button" class="program-tile${p.isTodo ? " program-tile-todo" : ""}" data-program-open="${i}" aria-label="${esc(p.name)} 자세히 보기">
-        <img class="program-tile-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">
+        ${p.image ? `<img class="program-tile-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">` : ""}
         <span class="program-tile-overlay" aria-hidden="true"></span>
-        <span class="program-tile-badge">${esc(p.badge)}</span>
         <span class="program-tile-body">
           <span class="program-tile-name">${esc(p.name)}</span>
           <span class="program-tile-summary">${esc(p.summary)}</span>
