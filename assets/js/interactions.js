@@ -38,26 +38,18 @@
     const el = buildProgramModal();
     const featureItems = (p.features || []).map((f) => `<li>${esc(f)}</li>`).join("");
     const prepItems = (p.prep || []).map((f) => `<li>${esc(f)}</li>`).join("");
-    const galleryImgs = (p.gallery || [])
-      .map((src) => `<img src="${esc(src)}" alt="${esc(p.name)} 관련 사진" loading="lazy">`)
-      .join("");
     el.querySelector(".program-modal-body").innerHTML = `
-      <img class="program-modal-cover" src="${esc(p.image)}" alt="${esc(p.name)}">
       <div class="program-modal-content">
-        <span class="program-tile-badge program-modal-badge">${esc(p.badge)}</span>
         <h3 class="program-modal-name">${esc(p.name)}</h3>
         <p class="program-modal-summary">${esc(p.summary)}</p>
         ${p.isTodo ? `<!-- TODO: ${esc(p.note)} -->\n        <p class="program-todo-note">⚠️ ${esc(p.note)}</p>` : ""}
         <dl class="program-card-meta">
-          <div><dt>소요시간</dt><dd>${esc(p.duration)}</dd></div>
-          <div><dt>가격</dt><dd>${esc(p.price)}</dd></div>
-          <div><dt>추천 대상</dt><dd>${esc(p.target)}</dd></div>
+          ${p.duration ? `<div><dt>소요시간</dt><dd>${esc(p.duration)}</dd></div>` : ""}
+          ${p.price ? `<div><dt>가격</dt><dd>${esc(p.price)}</dd></div>` : ""}
+          ${p.target ? `<div><dt>추천 대상</dt><dd>${esc(p.target)}</dd></div>` : ""}
         </dl>
-        <h4>체험 내용</h4>
-        <ul class="program-card-list">${featureItems}</ul>
-        <h4>준비물</h4>
-        <ul class="program-card-list">${prepItems}</ul>
-        <div class="program-card-gallery">${galleryImgs}</div>
+        ${p.features && p.features.length ? `<h4>체험 내용</h4><ul class="program-card-list">${featureItems}</ul>` : ""}
+        ${p.prep && p.prep.length ? `<h4>준비물</h4><ul class="program-card-list">${prepItems}</ul>` : ""}
       </div>`;
     el.hidden = false;
     el.querySelector(".program-modal-panel").scrollTop = 0;
