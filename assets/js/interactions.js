@@ -40,8 +40,9 @@
     const prepItems = (p.prep || []).map((f) => `<li>${esc(f)}</li>`).join("");
     const images = [p.image, ...(p.gallery || [])].filter((src, i, arr) => src && arr.indexOf(src) === i);
     const galleryImgs = images.map((src) => `<img src="${esc(src)}" alt="${esc(p.name)} 관련 사진" loading="lazy">`).join("");
+    const galleryClass = images.length > 1 ? "program-modal-gallery program-modal-gallery-fan" : "program-modal-gallery";
     el.querySelector(".program-modal-body").innerHTML = `
-      ${images.length ? `<div class="program-modal-gallery">${galleryImgs}</div>` : ""}
+      ${images.length ? `<div class="${galleryClass}">${galleryImgs}</div>` : ""}
       <div class="program-modal-content">
         <h3 class="program-modal-name">${esc(p.name)}</h3>
         <p class="program-modal-summary">${esc(p.summary)}</p>
