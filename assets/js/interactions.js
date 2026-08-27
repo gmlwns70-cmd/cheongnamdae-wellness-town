@@ -70,8 +70,9 @@
     target.scrollIntoView({ behavior: "smooth", block: "start" });
   }
 
-  // ----- 라이트박스 -----
+  // ----- 이미지 확대보기 (라이트박스) -----
   let lightboxEl = null;
+  let lightboxImages = [];
   let lightboxIndex = 0;
 
   function buildLightbox() {
@@ -88,31 +89,29 @@
         <button type="button" class="lightbox-nav lightbox-prev" data-lightbox-prev aria-label="이전 사진">‹</button>
         <img class="lightbox-img" alt="">
         <button type="button" class="lightbox-nav lightbox-next" data-lightbox-next aria-label="다음 사진">›</button>
-        <p class="lightbox-caption"></p>
       </div>`;
     document.body.appendChild(lightboxEl);
     return lightboxEl;
   }
 
-  function openLightbox(index) {
-    const gallery = (window.siteContent && window.siteContent.gallery) || [];
-    if (!gallery.length) return;
+  function openLightbox(images, startIndex) {
+    if (!images || !images.length) return;
     const el = buildLightbox();
-    lightboxIndex = (index + gallery.length) % gallery.length;
+    lightboxImages = images;
+    lightboxIndex = (startIndex + images.length) % images.length;
     updateLightbox();
+    el.querySelectorAll(".lightbox-nav").forEach((btn) => {
+      btn.hidden = lightboxImages.length < 2;
+    });
     el.hidden = false;
     document.body.classList.add("lightbox-open");
   }
 
   function updateLightbox() {
-    const gallery = (window.siteContent && window.siteContent.gallery) || [];
-    const item = gallery[lightboxIndex];
-    if (!lightboxEl || !item) return;
+    if (!lightboxEl || !lightboxImages.length) return;
     const img = lightboxEl.querySelector(".lightbox-img");
-    const caption = lightboxEl.querySelector(".lightbox-caption");
-    img.src = item.image;
-    img.alt = item.caption;
-    caption.textContent = item.caption;
+    img.src = lightboxImages[lightboxIndex];
+    img.alt = "";
   }
 
   function closeLightbox() {
@@ -122,9 +121,8 @@
   }
 
   function stepLightbox(delta) {
-    const gallery = (window.siteContent && window.siteContent.gallery) || [];
-    if (!gallery.length) return;
-    lightboxIndex = (lightboxIndex + delta + gallery.length) % gallery.length;
+    if (!lightboxImages.length) return;
+    lightboxIndex = (lightboxIndex + delta + lightboxImages.length) % lightboxImages.length;
     updateLightbox();
   }
 
@@ -147,9 +145,12 @@
       return;
     }
 
-    const lightboxOpen = event.target.closest("[data-lightbox-open]");
-    if (lightboxOpen) {
-      openLightbox(Number(lightboxOpen.getAttribute("data-lightbox-open")));
+    const galleryImg = event.target.closest(".program-modal-gallery img");
+    if (galleryImg) {
+      const gallery = galleryImg.closest(".program-modal-gallery");
+      const imgs = Array.from(gallery.querySelectorAll("img"));
+      const images = imgs.map((img) => img.getAttribute("src"));
+      openLightbox(images, imgs.indexOf(galleryImg));
       return;
     }
 
@@ -170,13 +171,14 @@
   });
 
   document.addEventListener("keydown", (event) => {
-    if (event.key === "Escape" && programModalEl && !programModalEl.hidden) {
-      closeProgramModal();
+    if (lightboxEl && !lightboxEl.hidden) {
+      if (event.key === "Escape") closeLightbox();
+      if (event.key === "ArrowLeft") stepLightbox(-1);
+      if (event.key === "ArrowRight") stepLightbox(1);
       return;
     }
-    if (!lightboxEl || lightboxEl.hidden) return;
-    if (event.key === "Escape") closeLightbox();
-    if (event.key === "ArrowLeft") stepLightbox(-1);
-    if (event.key === "ArrowRight") stepLightbox(1);
+    if (event.key === "Escape" && programModalEl && !programModalEl.hidden) {
+      closeProgramModal();
+    }
   });
 })();
