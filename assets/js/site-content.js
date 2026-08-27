@@ -7,7 +7,7 @@
 window.siteContent = {
   meta: {
     title: "청남대웰니스타운 | 편백 배럴 찜질 체험",
-    description: "청남대 웰니스타운은 충청북도 청주시 상당구 문의면에 위치한 편백 배럴 찜질 체험 공간입니다. 운영시간은 매일 09:00~21:00입니다."
+    description: "청남대 웰니스산양삼주 담그기 체험타운은 충청북도 청주시 상당구 문의면산양삼주 담그기 체험에 위치한 편백 배럴 찜질 체험 공간입니다. 운영시간은 매일 09:00~21:00입니다."
   },
 
   business: {
@@ -87,8 +87,7 @@ window.siteContent = {
       duration: "약 1시간",
       price: "별도 체험비는 없습니다.",
       target: "걷기 편한 신발 착용을 권장합니다",
-      /* TODO: 임시 이미지를 삭제했습니다. 실제 산책로 체험 사진으로 교체해 주세요. */
-      image: "",
+      image: "assets/images/mountain-view.webp",
       features: [
         "청남대 인근 대통령 산책로를 따라 걷는 숲길 코스",
         "피톤치드 가득한 숲에서 맑은 공기를 마시는 시간",
@@ -107,8 +106,7 @@ window.siteContent = {
       duration: "TODO: 소요시간 입력",
       price: "1인 10,000원 / 5~6년근, 2뿌리",
       target: "",
-      /* TODO: 임시 이미지를 삭제했습니다. 실제 산양삼 캐기 체험 사진으로 교체해 주세요. */
-      image: "",
+      image: "assets/images/forest-experience.webp",
       features: [],
       prep: ["TODO: 준비물을 입력해 주세요."],
       gallery: [],
@@ -123,9 +121,8 @@ window.siteContent = {
       summary: "직접 산양삼주를 담가보는 체험입니다.",
       duration: "TODO: 소요시간 입력",
       price: "1인 15,000원/375ml, 1병",
-      target: "",
-      /* TODO: 임시 이미지를 삭제했습니다. 실제 산양삼주 담그기 체험 사진으로 교체해 주세요. */
-      image: "",
+            target: "",
+      image: "assets/images/sansam-wine-making.jpg",
       features: [],
       prep: [],
       gallery: [],
