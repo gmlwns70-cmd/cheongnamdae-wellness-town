@@ -3,7 +3,8 @@
   이 파일 하나에 홈페이지에 보이는 모든 글자/가격/링크/사진 목록이 들어 있습니다.
   ⚙️ 관리자 편집기에서 값을 바꾸고 "변경사항 다운로드"를 누르면
   이 객체와 같은 구조의 JSON 파일이 저장됩니다.
-*/
+*/      target: "",
+            image: "assets/images/Gemini_Generated_Image_qu6dzlqu6dzlqu6d.png",
 window.siteContent = {
   meta: {
     title: "청남대웰니스타운 | 편백 배럴 찜질 체험",
