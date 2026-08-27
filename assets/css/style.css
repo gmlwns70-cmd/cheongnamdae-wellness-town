@@ -1448,6 +1448,40 @@ button {
   color: var(--muted);
   font-size: 17px;
 }
+.program-modal-gallery {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  background: var(--forest-deep);
+}
+
+.program-modal-gallery img {
+  width: 100%;
+  height: 260px;
+  flex: none;
+  scroll-snap-align: start;
+  object-fit: cover;
+}
+
+.program-modal-duration {
+  margin: 14px 0 0;
+  color: var(--forest-deep);
+  font-weight: 700;
+}
+
+.program-modal-price {
+  margin: 0;
+  color: var(--forest-deep);
+  font-weight: 700;
+  line-height: 1.6;
+}
+
+.program-modal-note-text {
+  margin: 0;
+  color: var(--ink);
+  line-height: 1.7;
+}
 
 body.program-modal-open {
   overflow: hidden;
