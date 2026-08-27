@@ -13,8 +13,15 @@
       "'": "&#39;"
     }[ch]));
 
+  // 모달/라이트박스가 열려 있을 때 휴대폰 뒤로가기를 누르면 사이트를 벗어나는 대신
+  // 팝업만 닫히도록, 열 때마다 히스토리를 하나 쌓아두고 뒤로가기(popstate)를 감지합니다.
+  function pushModalHistory() {
+    history.pushState({ wellnessModal: true }, "", location.href);
+  }
+
   // ----- 체험 프로그램 상세 모달 (넷플릭스 카드 클릭 시) -----
   let programModalEl = null;
+  let programModalHistoryPushed = false;
 
   function buildProgramModal() {
     if (programModalEl) return programModalEl;
@@ -67,12 +74,17 @@
     el.hidden = false;
     el.querySelector(".program-modal-panel").scrollTop = 0;
     document.body.classList.add("program-modal-open");
+    pushModalHistory();
+    programModalHistoryPushed = true;
   }
 
-  function closeProgramModal() {
-    if (!programModalEl) return;
+  function closeProgramModal(fromPopState) {
+    if (!programModalEl || programModalEl.hidden) return;
     programModalEl.hidden = true;
     document.body.classList.remove("program-modal-open");
+    const hadHistory = programModalHistoryPushed;
+    programModalHistoryPushed = false;
+    if (!fromPopState && hadHistory) history.back();
   }
 
   function smoothScrollTo(id) {
@@ -85,6 +97,7 @@
   let lightboxEl = null;
   let lightboxImages = [];
   let lightboxIndex = 0;
+  let lightboxHistoryPushed = false;
 
   function buildLightbox() {
     if (lightboxEl) return lightboxEl;
@@ -116,6 +129,8 @@
     });
     el.hidden = false;
     document.body.classList.add("lightbox-open");
+    pushModalHistory();
+    lightboxHistoryPushed = true;
   }
 
   function updateLightbox() {
@@ -125,10 +140,13 @@
     img.alt = "";
   }
 
-  function closeLightbox() {
-    if (!lightboxEl) return;
+  function closeLightbox(fromPopState) {
+    if (!lightboxEl || lightboxEl.hidden) return;
     lightboxEl.hidden = true;
     document.body.classList.remove("lightbox-open");
+    const hadHistory = lightboxHistoryPushed;
+    lightboxHistoryPushed = false;
+    if (!fromPopState && hadHistory) history.back();
   }
 
   function stepLightbox(delta) {
@@ -190,6 +208,16 @@
     }
     if (event.key === "Escape" && programModalEl && !programModalEl.hidden) {
       closeProgramModal();
+    }
+  });
+
+  window.addEventListener("popstate", () => {
+    if (lightboxEl && !lightboxEl.hidden) {
+      closeLightbox(true);
+      return;
+    }
+    if (programModalEl && !programModalEl.hidden) {
+      closeProgramModal(true);
     }
   });
 })();
