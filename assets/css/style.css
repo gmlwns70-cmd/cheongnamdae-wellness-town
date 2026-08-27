@@ -1093,7 +1093,7 @@ button {
 
 /* ---- 헤더 (메뉴 없이 로고 + 관리자 버튼만) ---- */
 .site-header-simple .header-inner {
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 /* ---- 히어로 ---- */
