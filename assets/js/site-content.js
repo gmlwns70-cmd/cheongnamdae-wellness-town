@@ -13,11 +13,11 @@ window.siteContent = {
   business: {
     companyName: "청남대 웰니스타운",
     owner: "조동우",
-    businessNumber: "233-88-01155",
+    businessNumber: "602-18-52269",
     phone: "010-4924-3435",
     smsPhone: "010-4924-3435",
     email: "gmlwns70@gmail.com",
-    address: "충청북도 청주시 상당구 문의면 미천리 638-1",
+    address: "충청북도 청주시 상당구 문의면 미천2길 56-19",
     hours: "매일 09:00~21:00",
     parking: "주차 가능(무료)"
   },
@@ -60,21 +60,26 @@ window.siteContent = {
       badge: "대표 체험",
       isTodo: false,
       name: "편백 피톤치드 치유체험",
-      summary: "편백 향 가득한 배럴 찜질로 몸과 마음을 쉬어가는 대표 체험입니다.",
-      duration: "약 3시간",
-      price: "2인 40,000원, 3인 50,000원, 4인 60,000원, 추가인원 15,000원, 체험 예약시간은 1부(9시~12시), 2부(12시~15시), 3부(15시~18시), 4부(18시~21시)",
+      summary: "편백 향 가득한 배럴 찜질로 몸과 마음을 치유하는 대표 체험입니다.",
+      duration: "3시간 / 1부(9시~12시), 2부(12시~15시), 3부(15시~18시), 4부(18시~21시)",
+      price: "2인 40,000원, 3인 50,000원, 4인 60,000원, 추가인원 15,000원",
       target: "",
       image: "assets/images/barrel-lounge.webp",
       features: [
-        "편백나무 소재의 배럴 찜질 공간에서 온열 휴식",
-        "은은한 편백 향과 함께하는 실내 힐링 라운지",
-        "따뜻한 내부 난로 공간에서 몸을 데우는 시간"
+        "높은 피톤치드 함량 체험",
+        "천연 항균 및 탈취 체험",
+        "건강 및 피부 케어 체험"
       ],
-      prep: ["편한 복장", "찜질복·수건(미지참 시 현장 대여 5,000원)"],
+      prep: [
+        "편한 복장",
+        "찜질복·수건(미지참 시 현장 대여 5,000원)",
+        "상수원 보호(청정)지역으로 휴게음식,일반음식 제공 불가하니 소풍 오듯이 간단한 요기꺼리 준비해 오시기 바랍니다"
+      ],
       gallery: [
         "assets/images/barrel-lounge.webp",
         "assets/images/heater-room.webp",
-        "assets/images/barrel-interior.webp"
+        "assets/images/KakaoTalk_20260827_230727762.jpg",
+        "assets/images/entrance-banner.webp"
       ],
       note: ""
     },
@@ -82,36 +87,49 @@ window.siteContent = {
       id: "forest",
       badge: "자연 체험",
       isTodo: false,
-      name: "트래킹, 피톤치드 산책로",
-      summary: "트래킹, 산책로를 따라 걷는 완만한 숲길 힐링 코스입니다.",
+      name: "트래킹,산책로 산림 치유 체험",
+      summary: "트래킹, 산책로를 따라 걷는 완만한 숲길 산림 힐링.치유 체험입니다.",
       duration: "약 1시간",
       price: "별도 체험비는 없습니다.",
       target: "걷기 편한 신발 착용을 권장합니다",
       image: "assets/images/mountain-view.webp",
       features: [
-        "청남대 인근 대통령 산책로를 따라 걷는 숲길 코스",
-        "피톤치드 가득한 숲에서 맑은 공기를 마시는 시간",
-        "완만한 경사로 남녀노소 편안하게 걸을 수 있는 코스"
+        "자연 속에서 몸과 마음을 쉬게 하는 산림치유 체험",
+        "대청호가 내려다 보이는 스팟",
+        "사방(沙防)댐 학습 견학"
       ],
-      prep: ["편한 신발", "물, 모자(계절에 따라 준비)"],
-      gallery: [],
+      prep: [
+        "편한 신발, 복장",
+        "물, 모자(계절에 따라 준비)"
+      ],
+      gallery: [
+        "assets/images/view-flowers.webp"
+      ],
       note: ""
     },
     {
       id: "sansam-dig",
       badge: "신규",
-      isTodo: true,
+      isTodo: false,
       name: "산양삼 캐기 체험",
       summary: "농장 대표와 함께하는 산양삼 캐기 체험입니다.",
       duration: "TODO: 소요시간 입력",
       price: "1인 10,000원 / 5~6년근, 2뿌리",
       target: "",
       image: "assets/images/forest-experience.webp",
-      features: [],
-      prep: ["TODO: 준비물을 입력해 주세요."],
-      gallery: [],
-      /* TODO: 산양삼 캐기 체험 소요시간, 대표 이미지 입력 */
-      note: "TODO: 산양삼 캐기 체험 소요시간, 대표 이미지 입력"
+      features: [
+        "산속에서 산양삼을 직접 찾아보는 설렘과 재미",
+        "오랜 세월 자란 산양삼을 내 손으로 캐는 특별한 만족감",
+        "잎,줄기,뇌두,뿌리를 관찰하며 재배환경과 성장 과정을 배우는 경험"
+      ],
+      prep: [
+        "편한 신발, 복장",
+        "물, 모자(계절에 따라 준비)"
+      ],
+      gallery: [
+        "assets/images/forest-guide.webp"
+      ],
+      note: ""
     },
     {
       id: "sansam-wine",
@@ -123,10 +141,16 @@ window.siteContent = {
       price: "1인 15,000원/375ml, 1병",
       target: "",
       image: "assets/images/Gemini_Generated_Image_qu6dzlqu6dzlqu6d.png",
-      features: [],
-      prep: [],
+      features: [
+        "산양삼의 생육환경과 연근, 뿌리 형태, 세척/손질 방법 등을 배웁니다",
+        "직접 캔 산양삼으로 세상에 하나뿐인 나만의 담금주를 만들어 봅니다",
+        "부모님 생신, 부부 기념일 등 특별한 날을 위한 특별한 선물"
+      ],
+      prep: [
+        "편한 신발, 복장",
+        "물, 모자(계절에 따라 준비)"
+      ],
       gallery: [],
-      /* TODO: 산양삼주 담그기 체험 소요시간, 대표 이미지 입력 */
       note: "TODO: 산양삼주 담그기 체험 소요시간, 대표 이미지 입력"
     }
   ],
