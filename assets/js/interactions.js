@@ -38,18 +38,19 @@
     const el = buildProgramModal();
     const featureItems = (p.features || []).map((f) => `<li>${esc(f)}</li>`).join("");
     const prepItems = (p.prep || []).map((f) => `<li>${esc(f)}</li>`).join("");
+    const images = [p.image, ...(p.gallery || [])].filter((src, i, arr) => src && arr.indexOf(src) === i);
+    const galleryImgs = images.map((src) => `<img src="${esc(src)}" alt="${esc(p.name)} 관련 사진" loading="lazy">`).join("");
     el.querySelector(".program-modal-body").innerHTML = `
+      ${images.length ? `<div class="program-modal-gallery">${galleryImgs}</div>` : ""}
       <div class="program-modal-content">
         <h3 class="program-modal-name">${esc(p.name)}</h3>
         <p class="program-modal-summary">${esc(p.summary)}</p>
         ${p.isTodo ? `<!-- TODO: ${esc(p.note)} -->\n        <p class="program-todo-note">⚠️ ${esc(p.note)}</p>` : ""}
-        <dl class="program-card-meta">
-          ${p.duration ? `<div><dt>소요시간</dt><dd>${esc(p.duration)}</dd></div>` : ""}
-          ${p.price ? `<div><dt>가격</dt><dd>${esc(p.price)}</dd></div>` : ""}
-          ${p.target ? `<div><dt>추천 대상</dt><dd>${esc(p.target)}</dd></div>` : ""}
-        </dl>
+        ${p.duration ? `<p class="program-modal-duration">⏱ 소요시간: ${esc(p.duration)}</p>` : ""}
         ${p.features && p.features.length ? `<h4>체험 내용</h4><ul class="program-card-list">${featureItems}</ul>` : ""}
+        ${p.price ? `<h4>체험비</h4><p class="program-modal-price">${esc(p.price)}</p>` : ""}
         ${p.prep && p.prep.length ? `<h4>준비물</h4><ul class="program-card-list">${prepItems}</ul>` : ""}
+        ${p.note && !p.isTodo ? `<h4>기타</h4><p class="program-modal-note-text">${esc(p.note)}</p>` : ""}
       </div>`;
     el.hidden = false;
     el.querySelector(".program-modal-panel").scrollTop = 0;
