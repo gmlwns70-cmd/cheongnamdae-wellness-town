@@ -35,12 +35,22 @@
     const programs = (window.siteContent && window.siteContent.programs) || [];
     const p = programs[index];
     if (!p) return;
+    const biz = (window.siteContent && window.siteContent.business) || {};
     const el = buildProgramModal();
     const featureItems = (p.features || []).map((f) => `<li>${esc(f)}</li>`).join("");
     const prepItems = (p.prep || []).map((f) => `<li>${esc(f)}</li>`).join("");
     const images = [p.image, ...(p.gallery || [])].filter((src, i, arr) => src && arr.indexOf(src) === i);
     const galleryImgs = images.map((src) => `<img src="${esc(src)}" alt="${esc(p.name)} 관련 사진" loading="lazy">`).join("");
     const galleryClass = images.length > 1 ? "program-modal-gallery program-modal-gallery-fan" : "program-modal-gallery";
+    const phoneDigits = String(biz.phone || "").replace(/[^0-9+]/g, "");
+    const smsDigits = String(biz.smsPhone || biz.phone || "").replace(/[^0-9+]/g, "");
+    const bookingButtons =
+      p.id === "hinoki"
+        ? `<div class="program-modal-actions">
+        <a class="button button-primary" href="tel:${esc(phoneDigits)}">📞 전화 예약하기</a>
+        <a class="button button-dark" href="sms:${esc(smsDigits)}">💬 문자 예약하기</a>
+      </div>`
+        : "";
     el.querySelector(".program-modal-body").innerHTML = `
       ${images.length ? `<div class="${galleryClass}">${galleryImgs}</div>` : ""}
       <div class="program-modal-content">
@@ -52,6 +62,7 @@
         ${p.price ? `<h4>체험비</h4><p class="program-modal-price">${esc(p.price)}</p>` : ""}
         ${p.prep && p.prep.length ? `<h4>준비물</h4><ul class="program-card-list">${prepItems}</ul>` : ""}
         ${p.note && !p.isTodo ? `<h4>기타</h4><p class="program-modal-note-text">${esc(p.note)}</p>` : ""}
+        ${bookingButtons}
       </div>`;
     el.hidden = false;
     el.querySelector(".program-modal-panel").scrollTop = 0;
