@@ -155,16 +155,7 @@ window.siteContent = {
     ]
   },
 
-  gallery: [
-    { image: "assets/images/barrel-lounge.webp", caption: "배럴 찜질 시설" },
-    { image: "assets/images/heater-room.webp", caption: "찜질방 내부" },
-    { image: "assets/images/forest-experience.webp", caption: "숲 체험" },
-    { image: "assets/images/mountain-view.webp", caption: "산 전망" },
-    { image: "assets/images/sunset-view.webp", caption: "노을 풍경" },
-    { image: "assets/images/view-flowers.webp", caption: "주변 풍경" },
-    { image: "assets/images/exterior-front.webp", caption: "외부 전경" },
-    { image: "assets/images/gallery-new-view.webp", caption: "7년근 산양삼" }
-  ],
+   gallery: [],
 
   visitInfo: {
     parts: [
