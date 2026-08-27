@@ -977,8 +977,8 @@ button {
   }
 
   .hero-inner {
-    min-height: calc(100svh - var(--header-height));
-    padding: 72px 0 92px;
+    min-height: auto;
+    padding: 40px 0 48px;
   }
 
   .intro-layout,
