@@ -12,23 +12,14 @@
       "'": "&#39;"
     }[ch]));
 
-  const normalizePhone = (value) => (value || "").replace(/[^\d+]/g, "");
-
   function renderHero() {
     const el = document.getElementById("hero");
     if (!el) return;
     const c = window.siteContent;
-    const kakaoUrl = c.links.kakaoChannel || "#kakao-channel-url";
     el.innerHTML = `
       <div class="hero-inner">
         <p class="hero-eyebrow">CHEONGNAMDAE WELLNESS TOWN</p>
         <h1 class="hero-title">${esc(c.hero.title)}</h1>
-        <p class="hero-subtitle">${esc(c.hero.subtitle)}</p>
-        <p class="hero-badge">${esc(c.hero.badge)}</p>
-        <div class="hero-actions">
-          <a class="hero-btn hero-btn-primary" href="${esc(kakaoUrl)}" data-link="kakaoChannel">💬 카카오채널로 예약하기</a>
-          <a class="hero-btn hero-btn-secondary" href="tel:${normalizePhone(c.business.phone)}" data-link="phone">📞 예약 전화</a>
-        </div>
       </div>`;
   }
 
@@ -40,8 +31,9 @@
       .map(
         (p, i) => `
       <button type="button" class="program-tile${p.isTodo ? " program-tile-todo" : ""}" data-program-open="${i}" aria-label="${esc(p.name)} 자세히 보기">
-        ${p.image ? `<img class="program-tile-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">` : ""}
+        <img class="program-tile-img" src="${esc(p.image)}" alt="${esc(p.name)}" loading="lazy">
         <span class="program-tile-overlay" aria-hidden="true"></span>
+        <span class="program-tile-badge">${esc(p.badge)}</span>
         <span class="program-tile-body">
           <span class="program-tile-name">${esc(p.name)}</span>
           <span class="program-tile-summary">${esc(p.summary)}</span>
