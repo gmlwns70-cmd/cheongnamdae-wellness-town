@@ -1450,6 +1450,9 @@ button {
 .program-modal-gallery {
   background: var(--forest-deep);
 }
+.program-modal-gallery img {
+  cursor: pointer;
+}
 
 .program-modal-gallery:not(.program-modal-gallery-fan) img {
   display: block;
@@ -1652,7 +1655,7 @@ body.lightbox-open {
 .lightbox {
   position: fixed;
   inset: 0;
-  z-index: 200;
+  z-index: 300;
   display: grid;
   place-items: center;
 }
