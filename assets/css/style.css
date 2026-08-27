@@ -1286,11 +1286,10 @@ button {
 
 @media (min-width: 700px) {
   .program-cards {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
   }
 }
-
 .program-tile {
   position: relative;
   display: block;
